@@ -28,7 +28,4 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:+'
     //picasso
     compile 'com.squareup.picasso:picasso:+'
-
-
-
 }
