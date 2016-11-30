@@ -17,7 +17,6 @@
 
     </android.support.v7.widget.RecyclerView>
 加入数据，图片是从网上找的几张图片，加入数据集合中
-![](http://i.imgur.com/NoUfhR0.png)
     images.add("http://img3.imgtn.bdimg.com/it/u=3993672553,267575750&fm=21&gp=0.jpg");
     images.add("http://img5.imgtn.bdimg.com/it/u=2652905594,2769975769&fm=21&gp=0.jpg");
     images.add("http://i.zeze.com/attachment/forum/201511/06/180208mwwxx8oer7wirv89.jpg");
