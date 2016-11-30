@@ -9,9 +9,12 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
 import com.jelly.imagebrowse.view.ImageBrowseView;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,9 +48,19 @@ public class ImageBrowsePresenter {
 
         final String imageUrl = getPositionImage();
 
-        Picasso.with(view.getMyContext()).load(imageUrl).into(new Target() {
+        Glide.with(view.getMyContext()).load(imageUrl).asBitmap().into(new Target<Bitmap>() {
             @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            public void onLoadStarted(Drawable placeholder) {
+
+            }
+
+            @Override
+            public void onLoadFailed(Exception e, Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 // 创建目录
                 File appDir = new File(Environment.getExternalStorageDirectory(), "JellyImage");
                 if (!appDir.exists()) {
@@ -62,7 +75,7 @@ public class ImageBrowsePresenter {
                     FileOutputStream fos = new FileOutputStream(file);
                     if(TextUtils.equals(imageType,"jpg")) imageType = "jpeg";
                     imageType = imageType.toUpperCase();
-                    bitmap.compress(Bitmap.CompressFormat.valueOf(imageType), 100, fos);
+                    resource.compress(Bitmap.CompressFormat.valueOf(imageType), 100, fos);
                     fos.flush();
                     fos.close();
                     Toast.makeText(view.getMyContext(),"保存成功",Toast.LENGTH_SHORT).show(); //Toast
@@ -83,12 +96,37 @@ public class ImageBrowsePresenter {
             }
 
             @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
+            public void onLoadCleared(Drawable placeholder) {
 
             }
 
             @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
+            public void getSize(SizeReadyCallback cb) {
+
+            }
+
+            @Override
+            public void setRequest(Request request) {
+
+            }
+
+            @Override
+            public Request getRequest() {
+                return null;
+            }
+
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onStop() {
+
+            }
+
+            @Override
+            public void onDestroy() {
 
             }
         });

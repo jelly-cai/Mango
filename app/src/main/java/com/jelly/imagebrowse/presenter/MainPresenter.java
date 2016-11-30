@@ -17,9 +17,9 @@ public class MainPresenter {
         this.view = view;
     }
 
-    public void loadImage(){
+    public void loadImage() {
 
-        if(images == null) images = new ArrayList<>();
+        if (images == null) images = new ArrayList<>();
 
         images.add("http://img3.imgtn.bdimg.com/it/u=3993672553,267575750&fm=21&gp=0.jpg");
         images.add("http://img5.imgtn.bdimg.com/it/u=2652905594,2769975769&fm=21&gp=0.jpg");
@@ -29,7 +29,6 @@ public class MainPresenter {
         images.add("http://v1.qzone.cc/pic/201405/25/13/57/5381864e3b8af886.jpg%21600x600.jpg");
         images.add("http://wanzao2.b0.upaiyun.com/system/pictures/23660313/original/8d4f08e50be02ae3.png");
         images.add("http://zyline-photo.qiniudn.com/1392705051156.jpg");
-
         view.setImages(images);
         view.initRecycler();
 
