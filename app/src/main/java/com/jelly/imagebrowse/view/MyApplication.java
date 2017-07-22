@@ -20,4 +20,5 @@ public class MyApplication extends Application{
         super.onCreate();
         Glide.get(this).register(GlideUrl.class, InputStream.class,new OkHttpUrlLoader.Factory(new OkHttpClient()));
     }
+
 }

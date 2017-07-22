@@ -18,20 +18,16 @@ public class MainPresenter {
     }
 
     public void loadImage() {
+        if (images == null) images = new ArrayList<String>();
 
-        if (images == null) images = new ArrayList<>();
+        images.add("http://img1.imgtn.bdimg.com/it/u=3649068744,3901725653&fm=26&gp=0.jpg");
+        images.add("http://img3.duitang.com/uploads/blog/201605/29/20160529072811_ZPWcY.thumb.224_0.jpeg");
+        images.add("http://img5.imgtn.bdimg.com/it/u=1981331305,170397280&fm=26&gp=0.jpg");
+        images.add("http://cdnq.duitang.com/uploads/item/201504/15/20150415H0546_YGatC.thumb.224_0.jpeg");
+        images.add("http://i1.buimg.com/1949/3fc9e01c986f974bs.jpg");
 
-        images.add("http://img3.imgtn.bdimg.com/it/u=3993672553,267575750&fm=21&gp=0.jpg");
-        images.add("http://img5.imgtn.bdimg.com/it/u=2652905594,2769975769&fm=21&gp=0.jpg");
-        images.add("http://i.zeze.com/attachment/forum/201511/06/180208mwwxx8oer7wirv89.jpg");
-        images.add("http://imgsrc.baidu.com/forum/w%3D580/sign=fe8a7e7f78ec54e741ec1a1689399bfd/4b3f9682d158ccbfb334467b1ad8bc3eb33541cd.jpg");
-        images.add("http://static.wgpet.com/editor/attached/image/20141124/20141124225933_71813.jpg");
-        images.add("http://v1.qzone.cc/pic/201405/25/13/57/5381864e3b8af886.jpg%21600x600.jpg");
-        images.add("http://wanzao2.b0.upaiyun.com/system/pictures/23660313/original/8d4f08e50be02ae3.png");
-        images.add("http://zyline-photo.qiniudn.com/1392705051156.jpg");
         view.setImages(images);
         view.initRecycler();
-
     }
 
 }

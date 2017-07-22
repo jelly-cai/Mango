@@ -30,6 +30,7 @@ public class ImageBrowsePresenter {
     private ImageBrowseView view;
     private List<String> images;
     private int position;
+    private int prePosition;
     private String[] imageTypes = new String[] { ".jpg",".png", ".jpeg","webp"};
 
     public ImageBrowsePresenter(ImageBrowseView view) {
@@ -141,7 +142,12 @@ public class ImageBrowsePresenter {
     }
 
     public void setPosition(int position) {
+        prePosition = this.position;
         this.position = position;
+    }
+
+    public int getPrePosition() {
+        return prePosition;
     }
 
     public String getImageType(String imageUrl){

@@ -25,8 +25,7 @@ public class ImageBrowseActivity extends Activity implements ViewPager.OnPageCha
     private TextView save;
     private ViewPageAdapter adapter;
     private ImageBrowsePresenter presenter;
-
-
+    private static final String TAG = ImageBrowseActivity.class.getName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +34,7 @@ public class ImageBrowseActivity extends Activity implements ViewPager.OnPageCha
         hint = (TextView) this.findViewById(R.id.hint);
         save = (TextView) this.findViewById(R.id.save);
         save.setOnClickListener(this);
+
         initPresenter();
         presenter.loadImage();
     }
@@ -55,6 +55,7 @@ public class ImageBrowseActivity extends Activity implements ViewPager.OnPageCha
 
     @Override
     public void setImageBrowse(List<String> images,int position) {
+
         if(adapter == null && images != null && images.size() != 0){
             adapter = new ViewPageAdapter(this,images);
             vp.setAdapter(adapter);
@@ -66,7 +67,6 @@ public class ImageBrowseActivity extends Activity implements ViewPager.OnPageCha
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
     }
 
     @Override
@@ -77,7 +77,9 @@ public class ImageBrowseActivity extends Activity implements ViewPager.OnPageCha
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
+        if(state == 0 && presenter.getPrePosition() != vp.getCurrentItem()){
+            adapter.updatePhotoView(presenter.getPrePosition());
+        }
     }
 
     @Override
@@ -85,13 +87,11 @@ public class ImageBrowseActivity extends Activity implements ViewPager.OnPageCha
         presenter.saveImage();
     }
 
-
     public static void startActivity(Context context, ArrayList<String> images, int position){
         Intent intent = new Intent(context,ImageBrowseActivity.class);
         intent.putStringArrayListExtra("images",images);
         intent.putExtra("position",position);
         context.startActivity(intent);
     }
-
 
 }
