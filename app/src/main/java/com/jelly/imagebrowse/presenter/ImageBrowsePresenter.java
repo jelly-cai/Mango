@@ -29,8 +29,6 @@ public class ImageBrowsePresenter {
 
     private ImageBrowseView view;
     private List<String> images;
-    private int position;
-    private int prePosition;
     private String[] imageTypes = new String[] { ".jpg",".png", ".jpeg","webp"};
 
     public ImageBrowsePresenter(ImageBrowseView view) {
@@ -40,8 +38,7 @@ public class ImageBrowsePresenter {
     public void loadImage(){
         Intent intent = view.getDataIntent();
         images = intent.getStringArrayListExtra("images");
-        position = intent.getIntExtra("position",0);
-        view.setImageBrowse(images,position);
+        view.setImageBrowse(images,intent.getIntExtra("position",0));
     }
 
     public void saveImage(){
@@ -134,20 +131,11 @@ public class ImageBrowsePresenter {
     }
 
     public String getPositionImage(){
-        return images.get(position);
+        return images.get(view.getPosition());
     }
 
     public List<String> getImages() {
         return images;
-    }
-
-    public void setPosition(int position) {
-        prePosition = this.position;
-        this.position = position;
-    }
-
-    public int getPrePosition() {
-        return prePosition;
     }
 
     public String getImageType(String imageUrl){

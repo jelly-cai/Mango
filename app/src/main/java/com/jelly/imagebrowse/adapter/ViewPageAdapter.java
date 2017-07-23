@@ -34,6 +34,8 @@ public class ViewPageAdapter extends PagerAdapter {
     private List<String> images;
     private SparseArray<SoftReference<View>> cacheView;
     private ViewGroup containerTemp;
+    private int prePosition;
+    private int position;
 
     public ViewPageAdapter(Context context, List<String> images) {
         this.context = context;
@@ -86,12 +88,26 @@ public class ViewPageAdapter extends PagerAdapter {
         container.removeView(view);
     }
 
+
     public void updatePhotoView(int position){
         View view = cacheView.get(position) != null ? cacheView.get(position).get() : null;
         if(view != null){
             PhotoViewAttacher photoViewAttacher = (PhotoViewAttacher) view.getTag();
             photoViewAttacher.update();
         }
+    }
+
+    public int getPrePosition() {
+        return prePosition;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.prePosition = this.position;
+        this.position = position;
     }
 
     private class MyTarget extends SimpleTarget<Bitmap>{

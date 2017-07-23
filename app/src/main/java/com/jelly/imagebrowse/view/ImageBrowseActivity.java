@@ -54,6 +54,11 @@ public class ImageBrowseActivity extends Activity implements ViewPager.OnPageCha
     }
 
     @Override
+    public int getPosition() {
+        return adapter.getPosition();
+    }
+
+    @Override
     public void setImageBrowse(List<String> images,int position) {
 
         if(adapter == null && images != null && images.size() != 0){
@@ -71,14 +76,14 @@ public class ImageBrowseActivity extends Activity implements ViewPager.OnPageCha
 
     @Override
     public void onPageSelected(int position) {
-        presenter.setPosition(position);
+        adapter.setPosition(position);
         hint.setText(position + 1 + "/" + presenter.getImages().size());
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-        if(state == 0 && presenter.getPrePosition() != vp.getCurrentItem()){
-            adapter.updatePhotoView(presenter.getPrePosition());
+        if(state == 0 && adapter.getPrePosition() != vp.getCurrentItem()){
+            adapter.updatePhotoView(adapter.getPrePosition());
         }
     }
 

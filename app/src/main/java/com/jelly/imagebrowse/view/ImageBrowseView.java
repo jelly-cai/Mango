@@ -15,4 +15,7 @@ public interface ImageBrowseView {
     void setImageBrowse(List<String> images,int position);
 
     Context getMyContext();
+
+    int getPosition();
+
 }
