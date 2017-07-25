@@ -1,4 +1,4 @@
-package com.jelly.imagebrowse.view;
+package com.jelly.mango;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,9 +8,9 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
-import com.jelly.imagebrowse.R;
-import com.jelly.imagebrowse.adapter.ViewPageAdapter;
-import com.jelly.imagebrowse.presenter.ImageBrowsePresenter;
+import com.jelly.mango.adapter.ViewPageAdapter;
+import com.jelly.mango.presenter.ImageBrowsePresenter;
+import com.jelly.mango.view.ImageBrowseView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Jelly on 2016/9/3.
  */
-public class ImageBrowseActivity extends Activity implements ViewPager.OnPageChangeListener,View.OnClickListener,ImageBrowseView{
+public class ImageBrowseActivity extends Activity implements ViewPager.OnPageChangeListener,View.OnClickListener,ImageBrowseView {
 
     private ViewPager vp;
     private TextView hint;

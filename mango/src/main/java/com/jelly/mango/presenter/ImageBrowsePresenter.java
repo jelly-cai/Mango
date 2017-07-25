@@ -1,4 +1,4 @@
-package com.jelly.imagebrowse.presenter;
+package com.jelly.mango.presenter;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,7 +14,7 @@ import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
-import com.jelly.imagebrowse.view.ImageBrowseView;
+import com.jelly.mango.view.ImageBrowseView;
 
 import java.io.File;
 import java.io.FileNotFoundException;

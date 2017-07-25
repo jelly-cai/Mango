@@ -1,4 +1,4 @@
-package com.jelly.imagebrowse.adapter;
+package com.jelly.mango.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.jelly.imagebrowse.R;
+import com.jelly.mango.R;
 
 import java.lang.ref.SoftReference;
 import java.util.List;

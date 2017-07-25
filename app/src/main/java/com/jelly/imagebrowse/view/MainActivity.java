@@ -14,6 +14,7 @@ import com.jelly.imagebrowse.R;
 import com.jelly.imagebrowse.adapter.ImageRecyclerAdapter;
 import com.jelly.imagebrowse.adapter.OnRecyclerItemClickListener;
 import com.jelly.imagebrowse.presenter.MainPresenter;
+import com.jelly.mango.ImageBrowseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements MainView{
 
     private RecyclerView rv;
+
     private List<String> images;
     private ImageRecyclerAdapter adapter;
     private MainPresenter presenter;

@@ -1,4 +1,4 @@
-package com.jelly.imagebrowse.view;
+package com.jelly.mango.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

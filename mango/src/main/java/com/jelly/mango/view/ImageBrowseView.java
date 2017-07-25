@@ -1,4 +1,4 @@
-package com.jelly.imagebrowse.view;
+package com.jelly.mango.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ public interface ImageBrowseView {
 
     Intent getDataIntent();
 
-    void setImageBrowse(List<String> images,int position);
+    void setImageBrowse(List<String> images, int position);
 
     Context getMyContext();
 
