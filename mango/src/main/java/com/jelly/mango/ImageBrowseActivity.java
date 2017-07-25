@@ -1,10 +1,10 @@
 package com.jelly.mango;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Jelly on 2016/9/3.
  */
-public class ImageBrowseActivity extends Activity implements ViewPager.OnPageChangeListener,View.OnClickListener,ImageBrowseView {
+public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,View.OnClickListener,ImageBrowseView {
 
     private ViewPager vp;
     private TextView hint;
@@ -65,7 +65,7 @@ public class ImageBrowseActivity extends Activity implements ViewPager.OnPageCha
             adapter = new ViewPageAdapter(this,images);
             vp.setAdapter(adapter);
             vp.setCurrentItem(position);
-            vp.addOnPageChangeListener(this);
+            vp.setOnPageChangeListener(this);
             hint.setText(position + 1 + "/" + images.size());
         }
     }

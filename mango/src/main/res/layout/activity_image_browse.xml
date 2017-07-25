@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
-    <com.jelly.imagebrowse.view.ViewPagerFixed
+    <com.jelly.mango.view.ViewPagerFixed
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.jelly.imagebrowse.view.ViewPagerFixed>
+    </com.jelly.mango.view.ViewPagerFixed>
 
 
 
