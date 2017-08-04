@@ -89,7 +89,6 @@ public class ImageBrowsePresenter {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                // 最后通知图库更新
                 view.getMyContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file.getPath())));
             }
 
