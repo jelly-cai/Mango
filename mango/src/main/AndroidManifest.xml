@@ -12,7 +12,6 @@
 
         <activity
             android:name="ImageBrowseActivity"
-            android:process=":image"
             ></activity>
 
     </application>

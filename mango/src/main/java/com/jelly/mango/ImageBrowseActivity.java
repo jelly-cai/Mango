@@ -12,7 +12,6 @@ import com.jelly.mango.adapter.ViewPageAdapter;
 import com.jelly.mango.presenter.ImageBrowsePresenter;
 import com.jelly.mango.view.ImageBrowseView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -78,6 +77,9 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
     public void onPageSelected(int position) {
         adapter.setPosition(position);
         hint.setText(position + 1 + "/" + presenter.getImages().size());
+        if(Mango.imageSelectListener != null){
+            Mango.imageSelectListener.select(position);
+        }
     }
 
     @Override
@@ -92,11 +94,9 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
         presenter.saveImage();
     }
 
-    public static void startActivity(Context context, ArrayList<String> images, int position){
-        Intent intent = new Intent(context,ImageBrowseActivity.class);
-        intent.putStringArrayListExtra("images",images);
-        intent.putExtra("position",position);
-        context.startActivity(intent);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Mango.imageSelectListener = null;
     }
-
 }

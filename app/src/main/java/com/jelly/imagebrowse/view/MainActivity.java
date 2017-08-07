@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,12 +15,13 @@ import com.jelly.imagebrowse.R;
 import com.jelly.imagebrowse.adapter.ImageRecyclerAdapter;
 import com.jelly.imagebrowse.adapter.OnRecyclerItemClickListener;
 import com.jelly.imagebrowse.presenter.MainPresenter;
-import com.jelly.mango.ImageBrowseActivity;
+import com.jelly.mango.ImageSelectListener;
+import com.jelly.mango.Mango;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MainView{
+public class MainActivity extends AppCompatActivity implements MainView,ImageSelectListener{
 
     private RecyclerView rv;
 
@@ -62,13 +64,24 @@ public class MainActivity extends AppCompatActivity implements MainView{
             adapter.setItemClickListener(new OnRecyclerItemClickListener() {
                 @Override
                 public void click(View item, int position) {
-                    ImageBrowseActivity.startActivity(MainActivity.this, (ArrayList<String>) images,position);
+                    Mango.setImages((ArrayList<String>) images);
+                    Mango.setPosition(position);
+                    Mango.setImageSelectListener(MainActivity.this);
+                    try {
+                        Mango.open(MainActivity.this);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             });
             rv.setAdapter(adapter);
         }
     }
 
+    @Override
+    public void select(int index) {
+        Log.d("select", "select: "+index);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
