@@ -3,7 +3,7 @@
 Mango是一款用来方便实现图片查看的控件
 ### 使用
 #### Gradle
-	compile 'com.jelly:mango:1.0.0'
+	compile 'com.jelly:mango:1.0.1'
 #### 具体使用
 ##### 设置Glide
 	Glide.get(this).register(GlideUrl.class, InputStream.class,new OkHttpUrlLoader.Factory(new OkHttpClient()));
