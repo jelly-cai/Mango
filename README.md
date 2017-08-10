@@ -5,8 +5,6 @@ Mango是一款用来方便实现图片查看的控件
 #### Gradle
 	compile 'com.jelly:mango:1.0.1'
 #### 具体使用
-##### 设置Glide
-	Glide.get(this).register(GlideUrl.class, InputStream.class,new OkHttpUrlLoader.Factory(new OkHttpClient()));
 #### 开启浏览
 	setImages(ArrayList<String> imageUrls) //设置图片源
 	setPosition(int position) //设置初始显示位置
