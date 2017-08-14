@@ -58,7 +58,7 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
     }
 
     @Override
-    public void setImageBrowse(List<String> images,int position) {
+    public void setImageBrowse(List<MultiplexImage> images,int position) {
 
         if(adapter == null && images != null && images.size() != 0){
             adapter = new ViewPageAdapter(this,images);

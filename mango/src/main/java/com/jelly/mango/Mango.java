@@ -12,23 +12,23 @@ import java.util.ArrayList;
 public class Mango {
     public static final String TAG = "Mango";
     public static ImageSelectListener imageSelectListener;
-    public static ArrayList<String> imageUrls;
+    public static ArrayList<MultiplexImage> images;
     public static int position = 0;
 
     public static void open(Context context) throws Exception{
 
-        if(imageUrls == null){
+        if(images == null){
             throw new Exception("must set imageUrls");
         }
 
         Intent intent = new Intent(context,ImageBrowseActivity.class);
-        intent.putStringArrayListExtra("images",imageUrls);
+        intent.putParcelableArrayListExtra("images",images);
         intent.putExtra("position",position);
         context.startActivity(intent);
     }
 
-    public static void setImages(ArrayList<String> imageUrls){
-        Mango.imageUrls = imageUrls;
+    public static void setImages(ArrayList<MultiplexImage> images){
+        Mango.images = images;
     }
 
     public static void setPosition(int position){

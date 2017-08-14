@@ -6,14 +6,16 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
+import com.jelly.mango.MultiplexImage;
 import com.jelly.mango.view.ImageBrowseView;
 
 import java.io.File;
@@ -28,7 +30,7 @@ import java.util.List;
 public class ImageBrowsePresenter {
 
     private ImageBrowseView view;
-    private List<String> images;
+    private List<MultiplexImage> images;
     private String[] imageTypes = new String[] { ".jpg",".png", ".jpeg","webp"};
 
     public ImageBrowsePresenter(ImageBrowseView view) {
@@ -37,28 +39,27 @@ public class ImageBrowsePresenter {
 
     public void loadImage(){
         Intent intent = view.getDataIntent();
-        images = intent.getStringArrayListExtra("images");
+        images = intent.getParcelableArrayListExtra("images");
         view.setImageBrowse(images,intent.getIntExtra("position",0));
     }
 
-    public void saveImage(){
-        //利用Picasso加载图片
+    public void saveImage() {
 
-        final String imageUrl = getPositionImage();
+        final String imageUrl = getPositionImage().getPath();
 
-        Glide.with(view.getMyContext()).load(imageUrl).asBitmap().into(new Target<Bitmap>() {
+        Glide.with(view.getMyContext()).asBitmap().load(imageUrl).into(new Target<Bitmap>() {
             @Override
-            public void onLoadStarted(Drawable placeholder) {
+            public void onLoadStarted(@Nullable Drawable placeholder) {
 
             }
 
             @Override
-            public void onLoadFailed(Exception e, Drawable errorDrawable) {
+            public void onLoadFailed(@Nullable Drawable errorDrawable) {
 
             }
 
             @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                 // 创建目录
                 File appDir = new File(Environment.getExternalStorageDirectory(), "JellyImage");
                 if (!appDir.exists()) {
@@ -71,12 +72,12 @@ public class ImageBrowsePresenter {
                 //保存图片
                 try {
                     FileOutputStream fos = new FileOutputStream(file);
-                    if(TextUtils.equals(imageType,"jpg")) imageType = "jpeg";
+                    if (TextUtils.equals(imageType, "jpg")) imageType = "jpeg";
                     imageType = imageType.toUpperCase();
                     resource.compress(Bitmap.CompressFormat.valueOf(imageType), 100, fos);
                     fos.flush();
                     fos.close();
-                    Toast.makeText(view.getMyContext(),"保存成功",Toast.LENGTH_SHORT).show(); //Toast
+                    Toast.makeText(view.getMyContext(), "保存成功", Toast.LENGTH_SHORT).show(); //Toast
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -93,7 +94,7 @@ public class ImageBrowsePresenter {
             }
 
             @Override
-            public void onLoadCleared(Drawable placeholder) {
+            public void onLoadCleared(@Nullable Drawable placeholder) {
 
             }
 
@@ -103,10 +104,16 @@ public class ImageBrowsePresenter {
             }
 
             @Override
-            public void setRequest(Request request) {
+            public void removeCallback(SizeReadyCallback cb) {
 
             }
 
+            @Override
+            public void setRequest(@Nullable Request request) {
+
+            }
+
+            @Nullable
             @Override
             public Request getRequest() {
                 return null;
@@ -129,11 +136,11 @@ public class ImageBrowsePresenter {
         });
     }
 
-    public String getPositionImage(){
+    public MultiplexImage getPositionImage(){
         return images.get(view.getPosition());
     }
 
-    public List<String> getImages() {
+    public List<MultiplexImage> getImages() {
         return images;
     }
 

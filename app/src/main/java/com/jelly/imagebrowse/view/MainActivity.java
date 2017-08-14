@@ -17,6 +17,7 @@ import com.jelly.imagebrowse.adapter.OnRecyclerItemClickListener;
 import com.jelly.imagebrowse.presenter.MainPresenter;
 import com.jelly.mango.ImageSelectListener;
 import com.jelly.mango.Mango;
+import com.jelly.mango.util.ImageTypeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements MainView,ImageSel
             adapter.setItemClickListener(new OnRecyclerItemClickListener() {
                 @Override
                 public void click(View item, int position) {
-                    Mango.setImages((ArrayList<String>) images);
+                    Mango.setImages(ImageTypeUtil.getNormalImagesArrayList((ArrayList<String>) images));
                     Mango.setPosition(position);
                     Mango.setImageSelectListener(MainActivity.this);
                     try {
