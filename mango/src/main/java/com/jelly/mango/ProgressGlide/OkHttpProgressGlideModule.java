@@ -3,6 +3,7 @@ package com.jelly.mango.ProgressGlide;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
@@ -29,16 +30,21 @@ import okio.Okio;
 import okio.Source;
 
 public class OkHttpProgressGlideModule implements GlideModule {
+
+	public static final String TAG = "GlideModule";
+
 	@Override public void applyOptions(Context context, GlideBuilder builder) {	}
 	@Override public void registerComponents(Context context, Glide glide,Registry registry) {
-		OkHttpClient client = new OkHttpClient();
-		client.networkInterceptors().add(createInterceptor(new DispatchingProgressListener()));
+		OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(createInterceptor(new DispatchingProgressListener())).build();
+		Log.d(TAG, "registerComponents: ");
+		//client.networkInterceptors().add(createInterceptor(new DispatchingProgressListener()));
 		registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(client));
 	}
 
 	private static Interceptor createInterceptor(final ResponseProgressListener listener) {
 		return new Interceptor() {
 			@Override public Response intercept(Chain chain) throws IOException {
+				Log.d(TAG, "intercept: ");
 				Request request = chain.request();
 				Response response = chain.proceed(request);
 				return response.newBuilder()
@@ -143,7 +149,8 @@ public class OkHttpProgressGlideModule implements GlideModule {
 
 		@Override public BufferedSource source() {
 			if (bufferedSource == null) {
-				bufferedSource = Okio.buffer(responseBody.source());
+				Log.d(TAG, "source: ");
+				bufferedSource = Okio.buffer(source(responseBody.source()));
 			}
 			return bufferedSource;
 		}
@@ -159,6 +166,7 @@ public class OkHttpProgressGlideModule implements GlideModule {
 					} else {
 						totalBytesRead += bytesRead;
 					}
+					Log.d(TAG, "read: ");
 					progressListener.update(url, totalBytesRead, fullLength);
 					return bytesRead;
 				}

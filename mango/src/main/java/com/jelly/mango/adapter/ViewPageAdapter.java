@@ -60,7 +60,7 @@ public class ViewPageAdapter extends PagerAdapter {
 
             int type = images.get(position).getType();
 
-            MyProgressTarget<Bitmap> myProgressTarget = new MyProgressTarget<>(new BitmapImageViewTarget(image), loadImage);
+            MyProgressTarget<Bitmap> myProgressTarget = new MyProgressTarget<>(new BitmapImageViewTarget(image), loadImage,photoViewAttacher);
             String model = images.get(position).getPath();
             myProgressTarget.setModel(model);
             if(type == MultiplexImage.ImageType.GIF){
@@ -125,37 +125,41 @@ public class ViewPageAdapter extends PagerAdapter {
 
     static class MyProgressTarget<Z> extends ProgressTarget<String, Z> {
 
-        private final ProgressBar progressBar;
+        private ProgressBar progressBar;
+        private PhotoViewAttacher photoViewAttacher;
 
-        public MyProgressTarget(Target<Z> target, ProgressBar progressBar) {
+        public MyProgressTarget(Target<Z> target, ProgressBar progressBar,PhotoViewAttacher photoViewAttacher) {
             super(target);
             this.progressBar = progressBar;
+            this.photoViewAttacher = photoViewAttacher;
         }
 
         @Override
         public float getGranualityPercentage() {
+            Log.d(TAG, "getGranualityPercentage: ");
             return super.getGranualityPercentage();
         }
 
         @Override
         protected void onConnecting() {
-
+            Log.d(TAG, "onConnecting: ");
         }
 
         @Override
         protected void onDownloading(long bytesRead, long expectedLength) {
             progressBar.setProgress((int) (100 * bytesRead / expectedLength));
-            Log.e("zzzz", bytesRead + "/" + expectedLength);
+            Log.d(TAG, "onDownloading: " + bytesRead + "/" + expectedLength);
         }
 
         @Override
         protected void onDownloaded() {
-            Log.e("zzzz", "onDownloaded");
+            Log.d(TAG, "onDownloaded: ");
         }
 
         @Override
         protected void onDelivered() {
-
+            progressBar.setVisibility(View.GONE);
+            photoViewAttacher.update();
         }
     }
 

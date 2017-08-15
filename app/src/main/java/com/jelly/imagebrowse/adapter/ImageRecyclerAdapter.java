@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.jelly.imagebrowse.R;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     @Override
     public void onBindViewHolder(ImageHolder holder, int position) {
-        Glide.with(context).load(dataList.get(position)).thumbnail(1f).into(holder.image);
+       // Glide.with(context).load(dataList.get(position)).thumbnail(1f).into(holder.image);
     }
 
     public void setItemClickListener(OnRecyclerItemClickListener itemClickListener) {
