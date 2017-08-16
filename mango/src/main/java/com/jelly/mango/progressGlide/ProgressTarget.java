@@ -1,4 +1,4 @@
-package com.jelly.mango.ProgressGlide;
+package com.jelly.mango.progressGlide;
 
 
 import android.graphics.drawable.Drawable;
@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
+
 
 public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements OkHttpGlideModule.UIProgressListener {
     private static String TAG = ProgressTarget.class.getName();
@@ -21,12 +22,12 @@ public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements 
         this.model = model;
     }
 
-    public final T getModel() {
-        return model;
-    }
-
     public final void setModel(T model) {
         this.model = model;
+    }
+
+    public T getModel() {
+        return model;
     }
 
     /**
@@ -99,7 +100,7 @@ public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements 
         ignoreProgress = true;
         T model = this.model; // save in case it gets modified
         onDelivered();
-        OkHttpProgressGlideModule.forget(toUrlString(model));
+        OkHttpGlideModule.forget(toUrlString(model));
         this.model = null;
     }
 

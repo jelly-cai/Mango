@@ -1,4 +1,4 @@
-package com.jelly.mango.ProgressGlide;
+package com.jelly.mango.progressGlide;
 
 import android.support.annotation.NonNull;
 import android.util.Log;

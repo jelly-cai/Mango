@@ -1,4 +1,4 @@
-package com.jelly.mango.ProgressGlide;
+package com.jelly.mango.progressGlide;
 
 
 import android.content.Context;
@@ -43,15 +43,12 @@ public class OkHttpGlideModule extends AppGlideModule{
     @Override public void applyOptions(Context context, GlideBuilder builder) {	}
     @Override public void registerComponents(Context context, Glide glide, Registry registry) {
         OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(createInterceptor(new DispatchingProgressListener())).build();
-        Log.d(TAG, "registerComponents: ");
-        //client.networkInterceptors().add(createInterceptor(new DispatchingProgressListener()));
         registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(client));
     }
 
     private static Interceptor createInterceptor(final ResponseProgressListener listener) {
         return new Interceptor() {
             @Override public Response intercept(Chain chain) throws IOException {
-                Log.d(TAG, "intercept: ");
                 Request request = chain.request();
                 Response response = chain.proceed(request);
                 return response.newBuilder()
@@ -96,11 +93,10 @@ public class OkHttpGlideModule extends AppGlideModule{
         }
         static void expect(String url, UIProgressListener listener) {
             LISTENERS.put(url, listener);
-            Log.d(TAG, "load:expect: "+url);
         }
 
         @Override public void update(HttpUrl url, final long bytesRead, final long contentLength) {
-            System.out.printf("load:%s: %d/%d = %.2f%%%n", url, bytesRead, contentLength, (100f * bytesRead) / contentLength);
+            //System.out.printf("%s: %d/%d = %.2f%%%n", url, bytesRead, contentLength, (100f * bytesRead) / contentLength);
             String key = url.toString();
             final UIProgressListener listener = LISTENERS.get(key);
 
@@ -158,7 +154,6 @@ public class OkHttpGlideModule extends AppGlideModule{
 
         @Override public BufferedSource source() {
             if (bufferedSource == null) {
-                Log.d(TAG, "source: ");
                 bufferedSource = Okio.buffer(source(responseBody.source()));
             }
             return bufferedSource;
@@ -175,7 +170,6 @@ public class OkHttpGlideModule extends AppGlideModule{
                     } else {
                         totalBytesRead += bytesRead;
                     }
-                    Log.d(TAG, "read: "+progressListener.toString());
                     progressListener.update(url, totalBytesRead, fullLength);
                     return bytesRead;
                 }

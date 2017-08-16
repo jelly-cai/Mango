@@ -15,8 +15,8 @@ import android.widget.ProgressBar;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.jelly.mango.MultiplexImage;
-import com.jelly.mango.ProgressGlide.GlideApp;
-import com.jelly.mango.ProgressGlide.ProgressTarget;
+import com.jelly.mango.progressGlide.GlideApp;
+import com.jelly.mango.progressGlide.ProgressTarget;
 import com.jelly.mango.R;
 
 import java.lang.ref.SoftReference;

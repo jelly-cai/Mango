@@ -1,4 +1,4 @@
-package com.jelly.mango.ProgressGlide;
+package com.jelly.mango.progressGlide;
 
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.model.GlideUrl;

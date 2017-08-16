@@ -1,4 +1,4 @@
-package com.jelly.mango.ProgressGlide;
+package com.jelly.mango.progressGlide;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -16,9 +16,6 @@ public class WrappingTarget<Z> implements Target<Z> {
         this.target = target;
     }
 
-    public @NonNull Target<? super Z> getWrappedTarget() {
-        return target;
-    }
 
     @Override
     public void getSize(SizeReadyCallback cb) {
