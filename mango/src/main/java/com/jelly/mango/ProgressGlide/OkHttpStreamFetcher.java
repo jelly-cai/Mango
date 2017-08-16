@@ -33,6 +33,7 @@ public class OkHttpStreamFetcher implements DataFetcher<InputStream> {
     this.url = url;
   }
 
+
   @Override
   public void loadData(Priority priority, final DataCallback<? super InputStream> callback) {
     Request.Builder requestBuilder = new Request.Builder().url(url.toStringUrl());

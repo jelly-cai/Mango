@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.jelly.mango.MultiplexImage;
+import com.jelly.mango.ProgressGlide.GlideApp;
 import com.jelly.mango.ProgressGlide.ProgressTarget;
 import com.jelly.mango.R;
 
@@ -66,7 +66,8 @@ public class ViewPageAdapter extends PagerAdapter {
             if(type == MultiplexImage.ImageType.GIF){
 
             }else{
-                Glide.with(context).asBitmap().load(model).into(myProgressTarget);
+                //Glide.with(context).asBitmap().load(model).into(myProgressTarget);
+                GlideApp.with(context).asBitmap().load(model).into(myProgressTarget);
             }
             //Glide.with(context).load(images.get(position).getPath()).asBitmap().into(new MyTarget(photoViewAttacher,loadImage));
 

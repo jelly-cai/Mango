@@ -9,9 +9,7 @@
     <application android:allowBackup="true"
                  android:label="@string/app_name"
                  android:supportsRtl="true">
-        <meta-data
-            android:name="com.jelly.mango.ProgressGlide.OkHttpProgressGlideModule"
-            android:value="GlideModule" />
+
 
         <activity
             android:name="ImageBrowseActivity"

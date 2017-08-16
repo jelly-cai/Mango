@@ -95,6 +95,7 @@ public class OkHttpProgressGlideModule implements GlideModule {
 			//System.out.printf("%s: %d/%d = %.2f%%%n", url, bytesRead, contentLength, (100f * bytesRead) / contentLength);
 			String key = url.toString();
 			final UIProgressListener listener = LISTENERS.get(key);
+			Log.d(TAG, "load:update: "+LISTENERS.size());
 			if (listener == null) {
 				return;
 			}

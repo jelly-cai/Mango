@@ -2,11 +2,13 @@ package com.jelly.mango.ProgressGlide;
 
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 
-public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements OkHttpProgressGlideModule.UIProgressListener {
+public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements OkHttpGlideModule.UIProgressListener {
+    private static String TAG = ProgressTarget.class.getName();
     private T model;
     private boolean ignoreProgress = true;
 
@@ -87,10 +89,11 @@ public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements 
     protected abstract void onDelivered();
 
     private void start() {
-        OkHttpProgressGlideModule.expect(toUrlString(model), this);
+        OkHttpGlideModule.expect(toUrlString(model), this);
         ignoreProgress = false;
         onProgress(0, Long.MAX_VALUE);
     }
+
 
     private void cleanup() {
         ignoreProgress = true;
@@ -103,6 +106,7 @@ public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements 
     @Override
     public void onLoadStarted(Drawable placeholder) {
         super.onLoadStarted(placeholder);
+        Log.d(TAG, "load:onLoadStarted: ");
         start();
     }
 
