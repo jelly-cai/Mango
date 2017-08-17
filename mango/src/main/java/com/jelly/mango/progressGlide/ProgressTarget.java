@@ -1,8 +1,8 @@
 package com.jelly.mango.progressGlide;
 
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
@@ -12,17 +12,20 @@ public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements 
     private static String TAG = ProgressTarget.class.getName();
     private T model;
     private boolean ignoreProgress = true;
+    private Context context;
 
-    public ProgressTarget(Target<Z> target) {
-        this(null, target);
+    public ProgressTarget(Context context,Target<Z> target) {
+        this(null, context, target);
     }
 
-    public ProgressTarget(T model, Target<Z> target) {
+    public ProgressTarget(T model, Context context, Target<Z> target) {
         super(target);
         this.model = model;
+        this.context = context;
     }
 
     public final void setModel(T model) {
+        GlideApp.with(context).clear(this);
         this.model = model;
     }
 
@@ -47,6 +50,7 @@ public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements 
     public float getGranualityPercentage() {
         return 1.0f;
     }
+
 
     @Override
     public void onProgress(long bytesRead, long expectedLength) {
@@ -107,7 +111,6 @@ public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements 
     @Override
     public void onLoadStarted(Drawable placeholder) {
         super.onLoadStarted(placeholder);
-        Log.d(TAG, "load:onLoadStarted: ");
         start();
     }
 

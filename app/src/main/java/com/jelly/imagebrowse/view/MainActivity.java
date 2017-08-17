@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.bumptech.glide.Glide;
 import com.jelly.imagebrowse.R;
 import com.jelly.imagebrowse.adapter.ImageRecyclerAdapter;
 import com.jelly.imagebrowse.adapter.OnRecyclerItemClickListener;
@@ -66,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements MainView,ImageSel
             adapter.setItemClickListener(new OnRecyclerItemClickListener() {
                 @Override
                 public void click(View item, int position) {
+                    /*
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements MainView,ImageSel
                         }
                     }).start();
                     Glide.get(MainActivity.this).clearMemory();
+                    */
                     Mango.setImages(ImageTypeUtil.getNormalImagesArrayList((ArrayList<String>) images));
                     Mango.setPosition(position);
                     Mango.setImageSelectListener(MainActivity.this);

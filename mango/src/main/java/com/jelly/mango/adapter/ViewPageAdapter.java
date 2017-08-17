@@ -60,7 +60,7 @@ public class ViewPageAdapter extends PagerAdapter {
 
             int type = images.get(position).getType();
 
-            MyProgressTarget<Bitmap> myProgressTarget = new MyProgressTarget<>(new BitmapImageViewTarget(image), loadImage,photoViewAttacher);
+            MyProgressTarget<Bitmap> myProgressTarget = new MyProgressTarget<>(context, new BitmapImageViewTarget(image), loadImage,photoViewAttacher);
             String model = images.get(position).getPath();
             myProgressTarget.setModel(model);
             if(type == MultiplexImage.ImageType.GIF){
@@ -129,15 +129,14 @@ public class ViewPageAdapter extends PagerAdapter {
         private ProgressBar progressBar;
         private PhotoViewAttacher photoViewAttacher;
 
-        public MyProgressTarget(Target<Z> target, ProgressBar progressBar,PhotoViewAttacher photoViewAttacher) {
-            super(target);
+        public MyProgressTarget(Context context,Target<Z> target, ProgressBar progressBar,PhotoViewAttacher photoViewAttacher) {
+            super(context,target);
             this.progressBar = progressBar;
             this.photoViewAttacher = photoViewAttacher;
         }
 
         @Override
         public float getGranualityPercentage() {
-            Log.d(TAG, "getGranualityPercentage: ");
             return super.getGranualityPercentage();
         }
 
@@ -149,18 +148,18 @@ public class ViewPageAdapter extends PagerAdapter {
         @Override
         protected void onDownloading(long bytesRead, long expectedLength) {
             progressBar.setProgress((int) (100 * bytesRead / expectedLength));
-            Log.d(TAG, "onDownloading: " + bytesRead + "/" + expectedLength);
+            Log.d(TAG, "onDownloading: " + (int) (100 * bytesRead / expectedLength));
         }
 
         @Override
         protected void onDownloaded() {
             Log.d(TAG, "onDownloaded: ");
+            photoViewAttacher.update();
         }
 
         @Override
         protected void onDelivered() {
             progressBar.setVisibility(View.GONE);
-            photoViewAttacher.update();
         }
     }
 
