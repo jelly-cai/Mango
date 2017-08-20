@@ -10,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.target.Target;
 import com.jelly.mango.MultiplexImage;
 import com.jelly.mango.R;
 import com.jelly.mango.progressGlide.GlideApp;
-import com.jelly.mango.progressGlide.ProgressImageViewTarget;
+import com.jelly.mango.progressGlide.MangoBitmapTarget;
+import com.jelly.mango.progressGlide.MangoGIFDrawableTarget;
 import com.jelly.mango.progressGlide.ProgressTarget;
 import com.jelly.mango.progressview.ProgressImageView;
 
@@ -56,18 +58,17 @@ public class ViewPageAdapter extends PagerAdapter {
             PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(image);
 
             int type = images.get(position).getType();
-
-            MyProgressTarget<Bitmap> myProgressTarget = new MyProgressTarget<>(context, new ProgressImageViewTarget(photoViewAttacher),image);
             String model = images.get(position).getPath();
-            myProgressTarget.setModel(model);
+
             if(type == MultiplexImage.ImageType.GIF){
-
+                MangoProgressTarget<GifDrawable> gifTarget = new MangoProgressTarget<>(context, new MangoGIFDrawableTarget(photoViewAttacher),image);
+                gifTarget.setModel(model);
+                GlideApp.with(context).asGif().load(model).into(gifTarget);
             }else{
-                //Glide.with(context).asBitmap().load(model).into(myProgressTarget);
-                GlideApp.with(context).asBitmap().load(model).into(myProgressTarget);
+                MangoProgressTarget<Bitmap> otherTarget = new MangoProgressTarget<>(context, new MangoBitmapTarget(photoViewAttacher),image);
+                otherTarget.setModel(model);
+                GlideApp.with(context).asBitmap().load(model).into(otherTarget);
             }
-            //Glide.with(context).load(images.get(position).getPath()).asBitmap().into(new MyTarget(photoViewAttacher,loadImage));
-
             photoViewAttacher.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
                 @Override
                 public void onPhotoTap(View view, float x, float y) {
@@ -121,14 +122,15 @@ public class ViewPageAdapter extends PagerAdapter {
         this.position = position;
     }
 
-    static class MyProgressTarget<Z> extends ProgressTarget<String, Z> {
+    static class MangoProgressTarget<Z> extends ProgressTarget<String, Z> {
 
         private ProgressImageView progressImageView;
 
-        public MyProgressTarget(Context context,Target<Z> target,ProgressImageView progressImageView) {
+        public MangoProgressTarget(Context context,Target<Z> target,ProgressImageView progressImageView) {
             super(context,target);
             this.progressImageView = progressImageView;
         }
+
 
         @Override
         public float getGranualityPercentage() {
@@ -137,13 +139,12 @@ public class ViewPageAdapter extends PagerAdapter {
 
         @Override
         protected void onConnecting() {
-            Log.d(TAG, "onConnecting: ");
+
         }
 
         @Override
         protected void onDownloading(long bytesRead, long expectedLength) {
             progressImageView.setProgress((int) (100 * bytesRead / expectedLength));
-            Log.d(TAG, "onDownloading: " + (int) (100 * bytesRead / expectedLength));
         }
 
         @Override
@@ -157,25 +158,5 @@ public class ViewPageAdapter extends PagerAdapter {
             progressImageView.setFinish();
         }
     }
-
-
-    /*
-    private class MyTarget extends SimpleTarget<Bitmap>{
-        private PhotoViewAttacher viewAttacher;
-        private ProgressBar load;
-
-        public MyTarget(PhotoViewAttacher viewAttacher,ProgressBar load){
-            this.viewAttacher = viewAttacher;
-            this.load = load;
-        }
-
-        @Override
-        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-            load.setVisibility(View.INVISIBLE);
-            viewAttacher.getImageView().setImageBitmap(resource);
-            viewAttacher.update();
-        }
-
-    }*/
 
 }

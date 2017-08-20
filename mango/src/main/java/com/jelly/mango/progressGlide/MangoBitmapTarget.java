@@ -10,11 +10,11 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  * Created by Jelly on 2017/8/20.
  */
 
-public class ProgressImageViewTarget extends ImageViewTarget<Bitmap> {
+public class MangoBitmapTarget extends ImageViewTarget<Bitmap> {
 
     private PhotoViewAttacher photoViewAttacher;
 
-    public ProgressImageViewTarget(PhotoViewAttacher photoViewAttacher) {
+    public MangoBitmapTarget(PhotoViewAttacher photoViewAttacher) {
         super(photoViewAttacher.getImageView());
         this.photoViewAttacher = photoViewAttacher;
     }

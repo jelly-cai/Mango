@@ -2,8 +2,10 @@ package com.jelly.mango;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jelly on 2017/8/7.
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 public class Mango {
     public static final String TAG = "Mango";
     public static ImageSelectListener imageSelectListener;
-    public static ArrayList<MultiplexImage> images;
+    public static List<MultiplexImage> images;
     public static int position = 0;
 
     public static void open(Context context) throws Exception{
@@ -22,12 +24,12 @@ public class Mango {
         }
 
         Intent intent = new Intent(context,ImageBrowseActivity.class);
-        intent.putParcelableArrayListExtra("images",images);
+        intent.putParcelableArrayListExtra("images", (ArrayList<? extends Parcelable>) images);
         intent.putExtra("position",position);
         context.startActivity(intent);
     }
 
-    public static void setImages(ArrayList<MultiplexImage> images){
+    public static void setImages(List<MultiplexImage> images){
         Mango.images = images;
     }
 

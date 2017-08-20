@@ -24,11 +24,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".view.ImageBrowseActivity"
-            android:process=":image"
-            ></activity>
-
     </application>
 
 </manifest>

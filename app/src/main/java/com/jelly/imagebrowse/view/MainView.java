@@ -1,5 +1,7 @@
 package com.jelly.imagebrowse.view;
 
+import com.jelly.mango.MultiplexImage;
+
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  */
 public interface MainView {
 
-    void setImages(List<String> images);
+    void setImages(List<MultiplexImage> images);
 
     void initRecycler();
 

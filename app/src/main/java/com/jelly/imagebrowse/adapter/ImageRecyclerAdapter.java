@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.jelly.imagebrowse.R;
+import com.jelly.mango.MultiplexImage;
 
 import java.util.List;
 
@@ -17,12 +19,12 @@ import java.util.List;
  */
 public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdapter.ImageHolder>{
 
-    private List<String> dataList;
+    private List<MultiplexImage> dataList;
     private Context context;
     private LayoutInflater inflater;
     private OnRecyclerItemClickListener itemClickListener;
 
-    public ImageRecyclerAdapter(Context context,List<String> dataList) {
+    public ImageRecyclerAdapter(Context context,List<MultiplexImage> dataList) {
         this.context = context;
         this.dataList = dataList;
         inflater = LayoutInflater.from(context);
@@ -40,7 +42,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     @Override
     public void onBindViewHolder(ImageHolder holder, int position) {
-       // Glide.with(context).load(dataList.get(position)).thumbnail(1f).into(holder.image);
+        Glide.with(context).load(dataList.get(position).getPath()).thumbnail(1f).into(holder.image);
     }
 
     public void setItemClickListener(OnRecyclerItemClickListener itemClickListener) {

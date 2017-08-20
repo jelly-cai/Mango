@@ -17,16 +17,15 @@ import com.jelly.imagebrowse.adapter.OnRecyclerItemClickListener;
 import com.jelly.imagebrowse.presenter.MainPresenter;
 import com.jelly.mango.ImageSelectListener;
 import com.jelly.mango.Mango;
-import com.jelly.mango.util.ImageTypeUtil;
+import com.jelly.mango.MultiplexImage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MainView,ImageSelectListener{
 
     private RecyclerView rv;
 
-    private List<String> images;
+    private List<MultiplexImage> images;
     private ImageRecyclerAdapter adapter;
     private MainPresenter presenter;
 
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements MainView,ImageSel
     }
 
     @Override
-    public void setImages(List<String> images) {
+    public void setImages(List<MultiplexImage> images) {
         this.images = images;
     }
 
@@ -74,7 +73,9 @@ public class MainActivity extends AppCompatActivity implements MainView,ImageSel
                     }).start();
                     Glide.get(MainActivity.this).clearMemory();
                     */
-                    Mango.setImages(ImageTypeUtil.getNormalImagesArrayList((ArrayList<String>) images));
+
+
+                    Mango.setImages(images);
                     Mango.setPosition(position);
                     Mango.setImageSelectListener(MainActivity.this);
                     try {

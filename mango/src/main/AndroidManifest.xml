@@ -13,6 +13,7 @@
 
         <activity
             android:name="ImageBrowseActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             ></activity>
 
     </application>
