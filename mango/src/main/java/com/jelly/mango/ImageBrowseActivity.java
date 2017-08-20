@@ -71,6 +71,7 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        
     }
 
     @Override

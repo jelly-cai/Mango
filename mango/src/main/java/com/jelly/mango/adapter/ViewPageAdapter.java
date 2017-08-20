@@ -9,15 +9,14 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.jelly.mango.MultiplexImage;
-import com.jelly.mango.progressGlide.GlideApp;
-import com.jelly.mango.progressGlide.ProgressTarget;
 import com.jelly.mango.R;
+import com.jelly.mango.progressGlide.GlideApp;
+import com.jelly.mango.progressGlide.ProgressImageViewTarget;
+import com.jelly.mango.progressGlide.ProgressTarget;
+import com.jelly.mango.progressview.ProgressImageView;
 
 import java.lang.ref.SoftReference;
 import java.util.List;
@@ -53,14 +52,12 @@ public class ViewPageAdapter extends PagerAdapter {
         if(view == null){
             view = LayoutInflater.from(context).inflate(R.layout.vp_item_image,container,false);
             view.setTag(position);
-            ImageView image = (ImageView) view.findViewById(R.id.image);
-            ProgressBar loadImage = (ProgressBar) view.findViewById(R.id.load);
-
+            ProgressImageView image = (ProgressImageView) view.findViewById(R.id.image);
             PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(image);
 
             int type = images.get(position).getType();
 
-            MyProgressTarget<Bitmap> myProgressTarget = new MyProgressTarget<>(context, new BitmapImageViewTarget(image), loadImage,photoViewAttacher);
+            MyProgressTarget<Bitmap> myProgressTarget = new MyProgressTarget<>(context, new ProgressImageViewTarget(photoViewAttacher),image);
             String model = images.get(position).getPath();
             myProgressTarget.setModel(model);
             if(type == MultiplexImage.ImageType.GIF){
@@ -126,13 +123,11 @@ public class ViewPageAdapter extends PagerAdapter {
 
     static class MyProgressTarget<Z> extends ProgressTarget<String, Z> {
 
-        private ProgressBar progressBar;
-        private PhotoViewAttacher photoViewAttacher;
+        private ProgressImageView progressImageView;
 
-        public MyProgressTarget(Context context,Target<Z> target, ProgressBar progressBar,PhotoViewAttacher photoViewAttacher) {
+        public MyProgressTarget(Context context,Target<Z> target,ProgressImageView progressImageView) {
             super(context,target);
-            this.progressBar = progressBar;
-            this.photoViewAttacher = photoViewAttacher;
+            this.progressImageView = progressImageView;
         }
 
         @Override
@@ -147,19 +142,19 @@ public class ViewPageAdapter extends PagerAdapter {
 
         @Override
         protected void onDownloading(long bytesRead, long expectedLength) {
-            progressBar.setProgress((int) (100 * bytesRead / expectedLength));
+            progressImageView.setProgress((int) (100 * bytesRead / expectedLength));
             Log.d(TAG, "onDownloading: " + (int) (100 * bytesRead / expectedLength));
         }
 
         @Override
         protected void onDownloaded() {
             Log.d(TAG, "onDownloaded: ");
-            photoViewAttacher.update();
         }
 
         @Override
         protected void onDelivered() {
-            progressBar.setVisibility(View.GONE);
+            progressImageView.setProgress(100);
+            progressImageView.setFinish();
         }
     }
 
