@@ -2,6 +2,7 @@ package com.jelly.imagebrowse.presenter;
 
 import com.jelly.imagebrowse.view.MainView;
 import com.jelly.mango.MultiplexImage;
+import com.jelly.mango.util.ImageTypeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +29,9 @@ public class MainPresenter {
         images.add("https://gss0.baidu.com/7Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/a686c9177f3e670996662c8539c79f3df8dc5561.jpg");
 
         */
-        images.add(new MultiplexImage("http://images.9zhiad.com/20170117/5209a0d4-cebe-4224-987d-9d14c8b6688c.jpeg", MultiplexImage.ImageType.NORMAL));
-        images.add(new MultiplexImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm9z0Jl70MtMYFnNut4_t6zSte1Tf80N-n2ihQ24Nje7dwMdMD", MultiplexImage.ImageType.NORMAL));
-        images.add(new MultiplexImage("http://ubq.ubiaoqing.com/ubiaoqing58a46536d47d63821.gif",MultiplexImage.ImageType.GIF));
+        images.add(ImageTypeUtil.getImage("http://images.9zhiad.com/20170117/5209a0d4-cebe-4224-987d-9d14c8b6688c.jpeg",MultiplexImage.ImageType.NORMAL));
+        images.add(ImageTypeUtil.getImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm9z0Jl70MtMYFnNut4_t6zSte1Tf80N-n2ihQ24Nje7dwMdMD",MultiplexImage.ImageType.NORMAL));
+        images.add(ImageTypeUtil.getImage("http://ubq.ubiaoqing.com/ubiaoqing58a46536d47d63821.gif",MultiplexImage.ImageType.GIF));
         view.setImages(images);
         view.initRecycler();
     }

@@ -19,12 +19,13 @@ import java.util.List;
  */
 public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,View.OnClickListener,ImageBrowseView {
 
+    private static final String TAG = ImageBrowseActivity.class.getName();
+
     private ViewPager vp;
     private TextView hint;
     private TextView save;
     private ViewPageAdapter adapter;
-    private ImageBrowsePresenter presenter;
-    private static final String TAG = ImageBrowseActivity.class.getName();
+    private ImageBrowsePresenter presenter;;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
