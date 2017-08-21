@@ -35,7 +35,6 @@ public class MultiplexImage implements Parcelable {
     public static final class ImageType{
         public static final int NORMAL = 1;
         public static final int GIF = 2;
-        public static final int FILE = 3;
     }
 
 

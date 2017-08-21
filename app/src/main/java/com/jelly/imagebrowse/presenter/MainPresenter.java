@@ -32,6 +32,7 @@ public class MainPresenter {
         images.add(ImageTypeUtil.getImage("http://images.9zhiad.com/20170117/5209a0d4-cebe-4224-987d-9d14c8b6688c.jpeg",MultiplexImage.ImageType.NORMAL));
         images.add(ImageTypeUtil.getImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm9z0Jl70MtMYFnNut4_t6zSte1Tf80N-n2ihQ24Nje7dwMdMD",MultiplexImage.ImageType.NORMAL));
         images.add(ImageTypeUtil.getImage("http://ubq.ubiaoqing.com/ubiaoqing58a46536d47d63821.gif",MultiplexImage.ImageType.GIF));
+        images.add(ImageTypeUtil.getImage("/storage/emulated/0/Pictures/Screenshots/1466673934275.png",MultiplexImage.ImageType.NORMAL));
         view.setImages(images);
         view.initRecycler();
     }

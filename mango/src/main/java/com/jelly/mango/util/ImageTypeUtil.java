@@ -68,15 +68,6 @@ public class ImageTypeUtil {
     }
 
     /**
-     * get file list
-     * @param images
-     * @return
-     */
-    public static List<MultiplexImage> getFileImageList(List<String> images) {
-        return getImageList(images, MultiplexImage.ImageType.FILE);
-    }
-
-    /**
      * get gif list
      * @param images
      * @return
@@ -91,7 +82,7 @@ public class ImageTypeUtil {
      * @return
      */
     public static boolean isImageType(int imageType){
-        if(imageType != MultiplexImage.ImageType.NORMAL && imageType != MultiplexImage.ImageType.FILE && imageType != MultiplexImage.ImageType.GIF){
+        if(imageType != MultiplexImage.ImageType.NORMAL && imageType != MultiplexImage.ImageType.GIF){
             throw new RuntimeException("error image type");
         }else{
             return true;
