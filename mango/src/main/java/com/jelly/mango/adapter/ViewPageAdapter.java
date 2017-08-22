@@ -58,7 +58,7 @@ public class ViewPageAdapter extends PagerAdapter {
             PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(image);
 
             int type = images.get(position).getType();
-            String model = images.get(position).getPath();
+            String model = images.get(position).getTPath();
 
             if(type == MultiplexImage.ImageType.GIF){
                 MangoProgressTarget<GifDrawable> gifTarget = new MangoProgressTarget<>(context, new MangoGIFDrawableTarget(photoViewAttacher),image);

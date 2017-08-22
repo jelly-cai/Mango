@@ -8,20 +8,30 @@ import android.os.Parcelable;
  */
 
 public class MultiplexImage implements Parcelable {
-    private String path;
+    private String OPath;
+    private String TPath;
     private int type;
 
-    public MultiplexImage(String path, int type) {
-        this.path = path;
+    public MultiplexImage(String OPath,String TPath, int type) {
+        this.OPath = OPath;
+        this.TPath = TPath;
         this.type = type;
     }
 
-    public String getPath() {
-        return path;
+    public String getOPath() {
+        return OPath;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setOPath(String OPath) {
+        this.OPath = OPath;
+    }
+
+    public String getTPath() {
+        return TPath;
+    }
+
+    public void setTPath(String TPath) {
+        this.TPath = TPath;
     }
 
     public int getType() {
@@ -45,12 +55,14 @@ public class MultiplexImage implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.path);
+        dest.writeString(this.OPath);
+        dest.writeString(this.TPath);
         dest.writeInt(this.type);
     }
 
     protected MultiplexImage(Parcel in) {
-        this.path = in.readString();
+        this.OPath = in.readString();
+        this.TPath = in.readString();
         this.type = in.readInt();
     }
 

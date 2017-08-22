@@ -89,9 +89,20 @@ public class ImageTypeUtil {
         }
     }
 
-    public static MultiplexImage getImage(String path,int imageType){
+    /**
+     * create {@link MultiplexImage}
+     * @param OPath
+     * @param TPath
+     * @param imageType
+     * @return
+     */
+    public static MultiplexImage getImage(String OPath,String TPath,int imageType){
         if(!isImageType(imageType)) return null;
-        return new MultiplexImage(path,imageType);
+        return new MultiplexImage(OPath,TPath,imageType);
+    }
+
+    public static MultiplexImage getOImage(){
+        return null;
     }
 
 }

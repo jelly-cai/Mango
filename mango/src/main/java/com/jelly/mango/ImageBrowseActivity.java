@@ -65,9 +65,10 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
             adapter = new ViewPageAdapter(this,images);
             vp.setAdapter(adapter);
             vp.setCurrentItem(position);
-            vp.setOnPageChangeListener(this);
+            vp.addOnPageChangeListener(this);
             hint.setText(position + 1 + "/" + images.size());
         }
+
     }
 
     @Override
