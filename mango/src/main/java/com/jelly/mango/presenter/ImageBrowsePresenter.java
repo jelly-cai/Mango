@@ -45,7 +45,7 @@ public class ImageBrowsePresenter {
 
     public void saveImage() {
 
-        final String imageUrl = getPositionImage().getPath();
+        final String imageUrl = getPositionImage().getTPath();
 
         Glide.with(view.getMyContext()).asBitmap().load(imageUrl).into(new Target<Bitmap>() {
             @Override

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -58,7 +59,7 @@ public class ViewPageAdapter extends PagerAdapter {
             PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(image);
 
             int type = images.get(position).getType();
-            String model = images.get(position).getTPath();
+            String model = TextUtils.isEmpty(images.get(position).getTPath()) ? images.get(position).getTPath() : images.get(position).getOPath();
 
             if(type == MultiplexImage.ImageType.GIF){
                 MangoProgressTarget<GifDrawable> gifTarget = new MangoProgressTarget<>(context, new MangoGIFDrawableTarget(photoViewAttacher),image);

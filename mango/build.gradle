@@ -27,15 +27,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
     testCompile 'junit:junit:4.12'
     //PhotoView
-    compile 'com.github.chrisbanes.photoview:library:+'
+    compile "com.github.chrisbanes.photoview:library:${PHOTOVIEW}"
     //glide
-    compile 'com.github.bumptech.glide:glide:4.0.0'
-    annotationProcessor  'com.github.bumptech.glide:compiler:4.0.0'
+    compile "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+    annotationProcessor  "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
     //okhttp
-    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile "com.squareup.okhttp3:okhttp:${OKHTTP3_VERSION}"
 
 }
 
