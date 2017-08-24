@@ -44,7 +44,6 @@ public class ProgressImageView extends AppCompatImageView{
         invalidate();
     }
 
-
     public void setFinish(){
         isProgress = false;
         invalidate();
@@ -69,9 +68,7 @@ public class ProgressImageView extends AppCompatImageView{
         int bottom = centerY + innerCircle;
         paint.setStrokeWidth(ringWidth);
 
-
         canvas.drawArc(new RectF(left,top,right,bottom),-90, (float) (progress * 3.6),false,paint);
-
     }
 
     /**

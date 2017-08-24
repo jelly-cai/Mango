@@ -24,15 +24,19 @@
         android:textColor="@android:color/white"
         android:text="0/0"/>
 
-    <TextView
+    <com.jelly.mango.progressview.TextImageButton
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
         android:layout_margin="10dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:textColor="@android:color/white"
+        android:textSize="12sp"
         android:text="保存"/>
 
 </RelativeLayout>
