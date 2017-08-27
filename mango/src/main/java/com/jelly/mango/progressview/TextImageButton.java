@@ -25,15 +25,18 @@ public class TextImageButton extends AppCompatTextView{
 
     @Override
     protected void onDraw(Canvas canvas) {
-        
-        super.onDraw(canvas);
         int width = getWidth();
         int height = getHeight();
         Paint paint = new Paint();
-        paint.setColor(Color.WHITE);
+        paint.setARGB(50,100,100,100);
         paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setStyle(Paint.Style.FILL);
         canvas.drawRoundRect(new RectF(0,0,width,height),13,13,paint);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.WHITE);
+        canvas.drawRoundRect(new RectF(0,0,width,height),13,13,paint);
+        super.onDraw(canvas);
+
     }
 
 

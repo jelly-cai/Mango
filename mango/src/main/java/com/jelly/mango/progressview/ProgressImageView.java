@@ -16,7 +16,7 @@ public class ProgressImageView extends AppCompatImageView{
     private Paint paint;
     private Context context;
     private int progress = 0;
-    private boolean isProgress = true;
+    private boolean isProgress = false;
 
     public ProgressImageView(Context context) {
         super(context);
