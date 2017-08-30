@@ -1,6 +1,8 @@
 package com.jelly.mango.progressGlide;
 
 import android.graphics.Bitmap;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.bumptech.glide.request.target.ImageViewTarget;
 
@@ -27,6 +29,10 @@ public class MangoBitmapTarget extends ImageViewTarget<Bitmap> {
      */
     @Override
     protected void setResource(Bitmap resource) {
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.MATCH_PARENT;
+        view.setLayoutParams(params);
         view.setImageBitmap(resource);
         photoViewAttacher.update();
     }

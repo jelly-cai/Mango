@@ -10,7 +10,6 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.target.Target;
@@ -58,7 +57,6 @@ public class ViewPageAdapter extends PagerAdapter {
             view.setTag(position);
             ProgressImageView image = (ProgressImageView) view.findViewById(R.id.image);
             PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(image);
-            photoViewAttacher.setScaleType(ImageView.ScaleType.FIT_XY);
             int type = images.get(position).getType();
             String model = TextUtils.isEmpty(images.get(position).getTPath()) ? images.get(position).getTPath() : images.get(position).getOPath();
 
@@ -71,7 +69,7 @@ public class ViewPageAdapter extends PagerAdapter {
                 otherTarget.setModel(model);
                 GlideApp.with(context).asBitmap().load(model).placeholder(R.drawable.placeholder).into(otherTarget);
             }
-            photoViewAttacher.update();
+
             photoViewAttacher.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
                 @Override
                 public void onPhotoTap(View view, float x, float y) {
