@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.jelly.mango.adapter.ViewPageAdapter;
 import com.jelly.mango.presenter.ImageBrowsePresenter;
+import com.jelly.mango.progressview.TextImageButton;
 import com.jelly.mango.view.ImageBrowseView;
 
 import java.util.List;
@@ -23,18 +24,22 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
 
     private ViewPager vp;
     private TextView hint;
-    private TextView save;
+    private TextImageButton save;
+    private TextImageButton origin;
     private ViewPageAdapter adapter;
-    private ImageBrowsePresenter presenter;;
+    private ImageBrowsePresenter presenter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_image_browse);
         vp = (ViewPager) this.findViewById(R.id.viewPager);
         hint = (TextView) this.findViewById(R.id.hint);
-        save = (TextView) this.findViewById(R.id.save);
+        save = (TextImageButton) this.findViewById(R.id.save);
+        origin = (TextImageButton) this.findViewById(R.id.origin);
         save.setOnClickListener(this);
-
+        origin.setOnClickListener(this);
         initPresenter();
         presenter.loadImage();
     }
@@ -94,7 +99,13 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
 
     @Override
     public void onClick(View v) {
-        presenter.saveImage();
+        int id = v.getId();
+        if(id == R.id.save){
+            presenter.saveImage();
+        }else if(id == R.id.origin){
+            adapter.loadOriginalPicture();
+        }
+
     }
 
     @Override

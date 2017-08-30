@@ -136,6 +136,7 @@ public class ImageBrowsePresenter {
         });
     }
 
+
     public MultiplexImage getPositionImage(){
         return images.get(view.getPosition());
     }

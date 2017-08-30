@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.util.Log;
 
 /**
  * Created by Jelly on 2017/8/20.
@@ -42,6 +43,11 @@ public class ProgressImageView extends AppCompatImageView{
     public void setProgress(int progress) {
         this.progress = progress;
         invalidate();
+    }
+
+    public void setProgress(boolean progress) {
+        Log.d("ads", "setProgress: "+progress);
+        isProgress = progress;
     }
 
     public void setFinish(){

@@ -44,7 +44,7 @@
         android:text="保存"/>
 
     <com.jelly.mango.progressview.TextImageButton
-        android:id="@+id/orign"
+        android:id="@+id/origin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
