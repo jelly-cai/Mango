@@ -4,26 +4,26 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.support.v7.widget.AppCompatImageView;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.View;
 
 /**
- * Created by Jelly on 2017/8/20.
+ * Created by Jelly on 2017/8/31.
  */
 
-public class ProgressImageView extends AppCompatImageView{
+public class RingProgressView extends View {
 
     private Paint paint;
     private Context context;
     private int progress = 0;
     private boolean isProgress = false;
 
-    public ProgressImageView(Context context) {
+    public RingProgressView(Context context) {
         super(context);
     }
 
-    public ProgressImageView(Context context, AttributeSet attrs) {
+    public RingProgressView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         this.paint = new Paint();
@@ -35,28 +35,13 @@ public class ProgressImageView extends AppCompatImageView{
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if(isProgress)
-            drawProgress(canvas);
-        super.onDraw(canvas);
+        drawProgress(canvas,progress);
     }
+
 
     public void setProgress(int progress) {
         this.progress = progress;
         invalidate();
-    }
-
-    public void setProgress(boolean progress) {
-        Log.d("ads", "setProgress: "+progress);
-        isProgress = progress;
-    }
-
-    public void setFinish(){
-        isProgress = false;
-        invalidate();
-    }
-
-    public void drawProgress(Canvas canvas){
-        drawProgress(canvas,progress);
     }
 
     public void drawProgress(Canvas canvas, int progress){
@@ -64,7 +49,6 @@ public class ProgressImageView extends AppCompatImageView{
         int centerY = getHeight()/2;
         int innerCircle = dip2px(context, 25); //设置内圆半径
         int ringWidth = dip2px(context, 10); //设置圆环宽度
-
         //绘制外圆
         this.paint.setARGB(255, 255 ,255, 255);
         //计算圆弧的位置
