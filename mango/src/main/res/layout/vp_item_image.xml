@@ -13,8 +13,7 @@
     <ImageView
         android:id="@+id/oImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"/>
+        android:layout_height="match_parent"/>
 
     <com.jelly.mango.progressview.RingProgressView
         android:id="@+id/progress"
