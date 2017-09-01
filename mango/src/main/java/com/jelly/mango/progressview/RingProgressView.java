@@ -48,7 +48,7 @@ public class RingProgressView extends View {
         int centerX = getWidth()/2;
         int centerY = getHeight()/2;
         int innerCircle = dip2px(context, 25); //设置内圆半径
-        int ringWidth = dip2px(context, 10); //设置圆环宽度
+        int ringWidth = dip2px(context, 5); //设置圆环宽度
         //绘制外圆
         this.paint.setARGB(255, 255 ,255, 255);
         //计算圆弧的位置
