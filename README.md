@@ -1,14 +1,20 @@
 # Mango
 ### 简介
-Mango是一款用来方便实现图片查看的控件
+Mango是一款用来方便实现图片浏览的控件
 ### 使用
 #### Gradle
-	compile 'com.jelly:mango:1.0.1'
+	compile 'com.jelly:mango:1.1.0'
 #### 具体使用
-#### 开启浏览
-	setImages(ArrayList<String> imageUrls) //设置图片源
+#### 快速开始
+	setImages(List<MultiplexImage> images) //设置图片源
 	setPosition(int position) //设置初始显示位置
 	setImageSelectListener(ImageSelectListener listener) //设置滚动监听
 	open(Context context) //开启图片浏览
+#### 参数解释
+	MultiplexImage：图片加载源
+		构造函数MultiplexImage(String TPath,String OPath, int type)
+		TPath:初始显示图片
+		OPath:原图
+		type:图片类型（1：正常图片(MultiplexImage.ImageType.NORMAL)，2：GIF动图(MultiplexImage.ImageType.GIF)）
 ### 显示效果
-![Markdown](http://i4.bvimg.com/1949/6aadc4d48b25b8eds.png)
+![image.png](http://upload-images.jianshu.io/upload_images/2098384-534c8f1685f438f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

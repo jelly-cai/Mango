@@ -64,15 +64,6 @@ public class MainActivity extends AppCompatActivity implements MainView,ImageSel
             adapter.setItemClickListener(new OnRecyclerItemClickListener() {
                 @Override
                 public void click(View item, int position) {
-                    /*
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Glide.get(MainActivity.this).clearDiskCache();
-                        }
-                    }).start();
-                    Glide.get(MainActivity.this).clearMemory();
-                    */
 
 
                     Mango.setImages(images);
