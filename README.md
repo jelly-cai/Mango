@@ -17,4 +17,4 @@ Mango是一款用来方便实现图片浏览的控件
 		OPath:原图
 		type:图片类型（1：正常图片(MultiplexImage.ImageType.NORMAL)，2：GIF动图(MultiplexImage.ImageType.GIF)）
 ### 显示效果
-![image.png](http://upload-images.jianshu.io/upload_images/2098384-534c8f1685f438f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![显示效果](http://upload-images.jianshu.io/upload_images/2098384-534c8f1685f438f4.png)

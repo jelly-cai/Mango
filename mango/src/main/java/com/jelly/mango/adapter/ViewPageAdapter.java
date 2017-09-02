@@ -111,7 +111,7 @@ public class ViewPageAdapter extends PagerAdapter {
     /**
      * Update PhotoView on the slide the ViewPager
      *
-     * @param position
+     * @param position ViewPager position
      */
     public void updatePhotoView(int position){
         View view = cacheView.get(position) != null ? cacheView.get(position).get() : null;
@@ -142,7 +142,7 @@ public class ViewPageAdapter extends PagerAdapter {
     /**
      * Set previous position and current position
      *
-     * @param position
+     * @param position ViewPager position
      */
     public void setPosition(int position) {
         this.prePosition = this.position;
@@ -150,16 +150,16 @@ public class ViewPageAdapter extends PagerAdapter {
     }
 
     /**
-     * Start load image with glide<br/>
+     * <p>Start load image with glide</p>
      *
-     * If is GIF image use MangoGIFDrawableTarget and others use MangoBitmapTarget<br/>
-     * if is Original image use OMangoProgressTarget and others use MangoProgressTarget
+     * <p>If is GIF image use MangoGIFDrawableTarget and others use MangoBitmapTarget</p>
+     * <p>if is Original image use OMangoProgressTarget and others use MangoProgressTarget</p>
      *
-     * @param photoViewAttacher
-     * @param progressView
-     * @param image
-     * @param position
-     * @param isO
+     * @param photoViewAttacher {@link uk.co.senab.photoview.PhotoViewAttacher}
+     * @param progressView {@link com.jelly.mango.progressview.RingProgressView}
+     * @param image ImageView
+     * @param position ViewPager position
+     * @param isO whether
      */
     public void glideLoadImage(PhotoViewAttacher photoViewAttacher,RingProgressView progressView,ImageView image,int position,boolean isO){
 

@@ -27,7 +27,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
     compile "com.android.support:design:${ANDROID_SUPPORT_VERSION}"
     debugCompile "com.squareup.leakcanary:leakcanary-android:${LEAKCANARY}"
-    compile project(':mango')
-    //compile 'com.jelly:mango:1.0.1'
+    //compile project(':mango')
+    compile 'com.jelly:mango:1.1.0'
 }
 

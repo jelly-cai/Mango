@@ -72,7 +72,6 @@ public class RingProgressView extends View {
         int ringWidth = dip2px(context, 5); //设置圆环宽度
         //绘制外圆
         this.paint.setARGB(255, 255 ,255, 255);
-        //计算圆弧的位置
         int left = centerX - innerCircle;
         int top = centerY - innerCircle;
         int right = centerX + innerCircle;
@@ -84,9 +83,9 @@ public class RingProgressView extends View {
 
     /**
      * dip to px
-     * @param context
-     * @param dpValue
-     * @return
+     * @param context Context
+     * @param dpValue dp value
+     * @return px value
      */
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;

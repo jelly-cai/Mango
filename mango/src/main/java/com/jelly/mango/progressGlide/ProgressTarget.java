@@ -75,6 +75,8 @@ public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements 
     /**
      * Called when there's any progress on the download; not called when loading from cache.
      * At this time we know how many bytes have been transferred through the wire.
+     * @param bytesRead download bytes
+     * @param expectedLength all length
      */
     protected abstract void onDownloading(long bytesRead, long expectedLength);
 
