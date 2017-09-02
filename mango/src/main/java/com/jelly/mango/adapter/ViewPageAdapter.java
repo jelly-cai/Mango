@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.load.resource.gif.GifDrawable;
-import com.bumptech.glide.request.target.Target;
 import com.jelly.mango.MultiplexImage;
 import com.jelly.mango.R;
 import com.jelly.mango.progressGlide.GlideApp;
 import com.jelly.mango.progressGlide.MangoBitmapTarget;
 import com.jelly.mango.progressGlide.MangoGIFDrawableTarget;
-import com.jelly.mango.progressGlide.ProgressTarget;
+import com.jelly.mango.progressGlide.MangoProgressTarget;
+import com.jelly.mango.progressGlide.OMangoProgressTarget;
 import com.jelly.mango.progressview.RingProgressView;
 
 import java.lang.ref.SoftReference;
@@ -29,7 +29,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 
 /**
- * 图片浏览ViewPageAdapter
+ * Mango ViewPageAdapter
  * Created by Jelly on 2016/3/10.
  */
 public class ViewPageAdapter extends PagerAdapter {
@@ -54,13 +54,27 @@ public class ViewPageAdapter extends PagerAdapter {
         if(containerTemp == null) containerTemp = container;
         View view = cacheView.get(position) != null ? cacheView.get(position).get() : null;
         if(view == null){
+
+            Log.d(TAG, "instantiateItem: "+position);
+
             view = LayoutInflater.from(context).inflate(R.layout.vp_item_image,container,false);
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.image = (ImageView) view.findViewById(R.id.image);
             viewHolder.progressView = (RingProgressView) view.findViewById(R.id.progress);
             viewHolder.oImage = (ImageView) view.findViewById(R.id.oImage);
-            viewHolder.photoViewAttacher = new PhotoViewAttacher(viewHolder.image);
-            glideLoadImage(viewHolder.photoViewAttacher,viewHolder.progressView,viewHolder.image,position,false);
+
+            viewHolder.progressView.clearProgress();
+            viewHolder.progressView.setProgress(2);
+
+            //if is load original image before,hidden thumbnails ImageView and load original image
+            if(images.get(position).isLoading()){
+                viewHolder.photoViewAttacher = new PhotoViewAttacher(viewHolder.oImage);
+                viewHolder.image.setVisibility(View.INVISIBLE);
+                glideLoadImage(viewHolder.photoViewAttacher,viewHolder.progressView,viewHolder.image,position,true);
+            }else{
+                viewHolder.photoViewAttacher = new PhotoViewAttacher(viewHolder.image);
+                glideLoadImage(viewHolder.photoViewAttacher,viewHolder.progressView,viewHolder.image,position,false);
+            }
             viewHolder.photoViewAttacher.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
                 @Override
                 public void onPhotoTap(View view, float x, float y) {
@@ -68,6 +82,7 @@ public class ViewPageAdapter extends PagerAdapter {
                     activity.finish();
                 }
             });
+
             view.setTag(viewHolder);
             cacheView.put(position,new SoftReference(view));
         }
@@ -90,9 +105,14 @@ public class ViewPageAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         View view = (View) object;
         container.removeView(view);
+        Log.d(TAG, "destroyItem: "+images.size());
     }
 
-
+    /**
+     * Update PhotoView on the slide the ViewPager
+     *
+     * @param position
+     */
     public void updatePhotoView(int position){
         View view = cacheView.get(position) != null ? cacheView.get(position).get() : null;
         if(view != null){
@@ -101,22 +121,50 @@ public class ViewPageAdapter extends PagerAdapter {
         }
     }
 
+    /**
+     * Get previous position after the slide
+     *
+     * @return previous position
+     */
     public int getPrePosition() {
         return prePosition;
     }
 
+    /**
+     * Get current position
+     *
+     * @return current position
+     */
     public int getPosition() {
         return position;
     }
 
+    /**
+     * Set previous position and current position
+     *
+     * @param position
+     */
     public void setPosition(int position) {
         this.prePosition = this.position;
         this.position = position;
     }
 
+    /**
+     * Start load image with glide<br/>
+     *
+     * If is GIF image use MangoGIFDrawableTarget and others use MangoBitmapTarget<br/>
+     * if is Original image use OMangoProgressTarget and others use MangoProgressTarget
+     *
+     * @param photoViewAttacher
+     * @param progressView
+     * @param image
+     * @param position
+     * @param isO
+     */
     public void glideLoadImage(PhotoViewAttacher photoViewAttacher,RingProgressView progressView,ImageView image,int position,boolean isO){
 
-        int type = images.get(position).getType();
+        int type = images.get(position).getType(); //image type
+        //get image url(Thumbnails or Original)
         String model = null;
         if(isO){
             model = TextUtils.isEmpty(images.get(position).getOPath()) ? images.get(position).getTPath() : images.get(position).getOPath();
@@ -124,15 +172,15 @@ public class ViewPageAdapter extends PagerAdapter {
             model = TextUtils.isEmpty(images.get(position).getTPath()) ? images.get(position).getOPath() : images.get(position).getTPath();
         }
         if(type == MultiplexImage.ImageType.GIF){
-            MangoProgressTarget<GifDrawable> gifTarget = null;
             if(isO){
-                gifTarget = new OMangoProgressTarget<>(context, new MangoGIFDrawableTarget(photoViewAttacher), progressView,image);
+                OMangoProgressTarget<GifDrawable> gifTarget = new OMangoProgressTarget<>(context, new MangoGIFDrawableTarget(photoViewAttacher), progressView,image);
+                gifTarget.setModel(model);
+                GlideApp.with(context).asGif().load(model).fitCenter().into(gifTarget);
             }else{
-                gifTarget = new MangoProgressTarget<>(context, new MangoGIFDrawableTarget(photoViewAttacher), progressView);
+                MangoProgressTarget<GifDrawable> gifTarget = new MangoProgressTarget<>(context, new MangoGIFDrawableTarget(photoViewAttacher), progressView);
+                gifTarget.setModel(model);
+                GlideApp.with(context).asGif().load(model).fitCenter().into(gifTarget);
             }
-
-            gifTarget.setModel(model);
-            GlideApp.with(context).asGif().load(model).fitCenter().into(gifTarget);
         }else{
             if(isO){
                 OMangoProgressTarget<Bitmap> otherTarget = new OMangoProgressTarget<>(context, new MangoBitmapTarget(photoViewAttacher),progressView,image);
@@ -143,26 +191,36 @@ public class ViewPageAdapter extends PagerAdapter {
                 otherTarget.setModel(model);
                 GlideApp.with(context).asBitmap().load(model).fitCenter().into(otherTarget);
             }
-
-
         }
 
     }
 
     /**
-     * 加载原图
+     * Start original image
      */
     public void loadOriginalPicture(){
+        //If is loading,return
+        if(images.get(position).isLoading()){
+            return;
+        }
+        images.get(position).setLoading(true);
         View view = cacheView.get(position) != null ? cacheView.get(position).get() : null;
         if(view != null) {
             ViewHolder viewHolder = (ViewHolder) view.getTag();
             viewHolder.progressView.setVisibility(View.VISIBLE);
             viewHolder.progressView.setProgress(0);
             viewHolder.photoViewAttacher = new PhotoViewAttacher(viewHolder.oImage);
+
+            viewHolder.progressView.clearProgress();
+            viewHolder.progressView.setProgress(2);
+
             glideLoadImage(viewHolder.photoViewAttacher, viewHolder.progressView, viewHolder.image, position, true);
         }
     }
 
+    /**
+     * Cache ViewPager ViewHolder
+     */
     private class ViewHolder{
         ImageView image;
         ImageView oImage;
@@ -170,58 +228,5 @@ public class ViewPageAdapter extends PagerAdapter {
         PhotoViewAttacher photoViewAttacher;
     }
 
-    static class MangoProgressTarget<Z> extends ProgressTarget<String, Z> {
-
-        private RingProgressView progressView;
-
-        public MangoProgressTarget(Context context,Target<Z> target,RingProgressView progressView) {
-            super(context,target);
-            this.progressView = progressView;
-        }
-
-
-        @Override
-        public float getGranualityPercentage() {
-            return super.getGranualityPercentage();
-        }
-
-        @Override
-        protected void onConnecting() {
-
-        }
-
-        @Override
-        protected void onDownloading(long bytesRead, long expectedLength) {
-            progressView.setProgress((int) (100 * bytesRead / expectedLength));
-        }
-
-        @Override
-        protected void onDownloaded() {
-
-        }
-
-        @Override
-        protected void onDelivered() {
-            progressView.setProgress(100);
-            progressView.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    static class OMangoProgressTarget<Z> extends MangoProgressTarget<Z>{
-
-        private ImageView image;
-
-        public OMangoProgressTarget(Context context,Target<Z> target,RingProgressView progressView,ImageView image){
-            super(context,target,progressView);
-            this.image = image;
-        }
-
-        @Override
-        protected void onDelivered() {
-            super.onDelivered();
-            Log.d(TAG, "onDelivered: ");
-            image.setVisibility(View.GONE);
-        }
-    }
 
 }

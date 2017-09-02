@@ -4,13 +4,27 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
+ * ImageBean
  * Created by Jelly on 2017/8/13.
  */
 
 public class MultiplexImage implements Parcelable {
+    /**
+     * original image
+     */
     private String OPath;
+    /**
+     * thumbnails image
+     */
     private String TPath;
+    /**
+     * image type
+     */
     private int type;
+    /**
+     * whether load original image
+     */
+    private boolean Loading;
 
     public MultiplexImage(String TPath,String OPath, int type) {
         this.OPath = OPath;
@@ -32,6 +46,14 @@ public class MultiplexImage implements Parcelable {
 
     public void setTPath(String TPath) {
         this.TPath = TPath;
+    }
+
+    public boolean isLoading() {
+        return Loading;
+    }
+
+    public void setLoading(boolean loading) {
+        Loading = loading;
     }
 
     public int getType() {
@@ -58,12 +80,14 @@ public class MultiplexImage implements Parcelable {
         dest.writeString(this.OPath);
         dest.writeString(this.TPath);
         dest.writeInt(this.type);
+        dest.writeByte(this.Loading ? (byte) 1 : (byte) 0);
     }
 
     protected MultiplexImage(Parcel in) {
         this.OPath = in.readString();
         this.TPath = in.readString();
         this.type = in.readInt();
+        this.Loading = in.readByte() != 0;
     }
 
     public static final Creator<MultiplexImage> CREATOR = new Creator<MultiplexImage>() {

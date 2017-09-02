@@ -16,8 +16,7 @@ public class RingProgressView extends View {
 
     private Paint paint;
     private Context context;
-    private int progress = 0;
-    private boolean isProgress = false;
+    public int progress = 0;
 
     public RingProgressView(Context context) {
         super(context);
@@ -38,16 +37,38 @@ public class RingProgressView extends View {
         drawProgress(canvas,progress);
     }
 
+    public void clearProgress(){
+        this.progress = 0;
+    }
 
-    public void setProgress(int progress) {
-        this.progress = progress;
-        invalidate();
+    public void setProgress(final int progress) {
+        if(progress < this.progress) return;
+        if(progress - this.progress < 5){
+            invalidate();
+            return;
+        }
+        final int curProgress = this.progress;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i=curProgress;i<progress;i++){
+                    try {
+                        Thread.sleep(20);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    RingProgressView.this.progress = i;
+                    postInvalidate();
+                }
+            }
+        }).start();
+
     }
 
     public void drawProgress(Canvas canvas, int progress){
         int centerX = getWidth()/2;
         int centerY = getHeight()/2;
-        int innerCircle = dip2px(context, 25); //设置内圆半径
+        int innerCircle = dip2px(context, 18); //设置内圆半径
         int ringWidth = dip2px(context, 5); //设置圆环宽度
         //绘制外圆
         this.paint.setARGB(255, 255 ,255, 255);

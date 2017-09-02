@@ -2,20 +2,16 @@ package com.jelly.mango.presenter;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.jelly.mango.MultiplexImage;
+import com.jelly.mango.progressGlide.GlideApp;
 import com.jelly.mango.view.ImageBrowseView;
 
 import java.io.File;
@@ -28,6 +24,8 @@ import java.util.List;
  * Created by Jelly on 2016/9/3.
  */
 public class ImageBrowsePresenter {
+
+    private final static String TAG = ImageBrowsePresenter.class.getName();
 
     private ImageBrowseView view;
     private List<MultiplexImage> images;
@@ -45,23 +43,13 @@ public class ImageBrowsePresenter {
 
     public void saveImage() {
 
-        final String imageUrl = getPositionImage().getTPath();
+        final String imageUrl = getPositionImage().getOPath();
 
-        Glide.with(view.getMyContext()).asBitmap().load(imageUrl).into(new Target<Bitmap>() {
-            @Override
-            public void onLoadStarted(@Nullable Drawable placeholder) {
-
-            }
-
-            @Override
-            public void onLoadFailed(@Nullable Drawable errorDrawable) {
-
-            }
-
+        GlideApp.with(view.getMyContext()).asBitmap().load(imageUrl).into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                 // 创建目录
-                File appDir = new File(Environment.getExternalStorageDirectory(), "JellyImage");
+                File appDir = new File(Environment.getExternalStorageDirectory(), "mango");
                 if (!appDir.exists()) {
                     appDir.mkdir();
                 }
@@ -91,47 +79,6 @@ public class ImageBrowsePresenter {
                     e.printStackTrace();
                 }
                 view.getMyContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file.getPath())));
-            }
-
-            @Override
-            public void onLoadCleared(@Nullable Drawable placeholder) {
-
-            }
-
-            @Override
-            public void getSize(SizeReadyCallback cb) {
-
-            }
-
-            @Override
-            public void removeCallback(SizeReadyCallback cb) {
-
-            }
-
-            @Override
-            public void setRequest(@Nullable Request request) {
-
-            }
-
-            @Nullable
-            @Override
-            public Request getRequest() {
-                return null;
-            }
-
-            @Override
-            public void onStart() {
-
-            }
-
-            @Override
-            public void onStop() {
-
-            }
-
-            @Override
-            public void onDestroy() {
-
             }
         });
     }

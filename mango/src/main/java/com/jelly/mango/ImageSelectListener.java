@@ -6,6 +6,6 @@ package com.jelly.mango;
 
 public interface ImageSelectListener {
 
-    public void select(int index);
+    void select(int index);
 
 }
