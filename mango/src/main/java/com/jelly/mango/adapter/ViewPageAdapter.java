@@ -195,6 +195,7 @@ public class ViewPageAdapter extends PagerAdapter {
 
     }
 
+
     /**
      * Start original image
      */

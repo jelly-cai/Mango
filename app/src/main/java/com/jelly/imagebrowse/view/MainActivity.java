@@ -21,7 +21,7 @@ import com.jelly.mango.MultiplexImage;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MainView,ImageSelectListener{
+public class MainActivity extends AppCompatActivity implements MainView{
 
     private RecyclerView rv;
 
@@ -68,7 +68,12 @@ public class MainActivity extends AppCompatActivity implements MainView,ImageSel
 
                     Mango.setImages(images);
                     Mango.setPosition(position);
-                    Mango.setImageSelectListener(MainActivity.this);
+                    Mango.setImageSelectListener(new ImageSelectListener() {
+                        @Override
+                        public void select(int index) {
+                            Log.d("Mango", "select: "+index);
+                        }
+                    });
                     try {
                         Mango.open(MainActivity.this);
                     }catch (Exception e){
@@ -78,11 +83,6 @@ public class MainActivity extends AppCompatActivity implements MainView,ImageSel
             });
             rv.setAdapter(adapter);
         }
-    }
-
-    @Override
-    public void select(int index) {
-        Log.d("select", "select: "+index);
     }
 
     @Override
