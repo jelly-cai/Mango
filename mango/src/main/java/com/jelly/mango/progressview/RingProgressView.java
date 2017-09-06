@@ -47,14 +47,12 @@ public class RingProgressView extends View {
 
     public void setProgress(final int progress) {
 
-        if(progress < this.progress) return; //更新的进度小于上一进度，不更新
-        //更新的进度和上一进度的值差小于5，直接重绘
+        if(progress < this.progress) return;
         if(progress - this.progress < 5){
             this.progress = progress;
             invalidate();
             return;
         }
-        //正在加载进度，不更新
         if(isScroller) return;
 
         final int curProgress = this.progress;
