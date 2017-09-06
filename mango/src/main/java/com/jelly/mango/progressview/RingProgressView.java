@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -14,9 +15,11 @@ import android.view.View;
 
 public class RingProgressView extends View {
 
+    private static final String TAG = RingProgressView.class.getName();
     private Paint paint;
     private Context context;
-    public int progress = 0;
+    private int progress = 0;
+    private boolean isScroller = false;
 
     public RingProgressView(Context context) {
         super(context);
@@ -37,32 +40,41 @@ public class RingProgressView extends View {
         drawProgress(canvas,progress);
     }
 
-    public void clearProgress(){
-        this.progress = 0;
+    public void initProgress(){
+        progress = 0;
+        setProgress(3);
     }
 
     public void setProgress(final int progress) {
-        if(progress < this.progress) return;
+
+        if(progress < this.progress) return; //更新的进度小于上一进度，不更新
+        //更新的进度和上一进度的值差小于5，直接重绘
         if(progress - this.progress < 5){
+            this.progress = progress;
             invalidate();
             return;
         }
+        //正在加载进度，不更新
+        if(isScroller) return;
+
         final int curProgress = this.progress;
         new Thread(new Runnable() {
             @Override
             public void run() {
+                isScroller = true;
                 for(int i=curProgress;i<progress;i++){
                     try {
                         Thread.sleep(20);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
+                    Log.d(TAG, "run: "+i);
                     RingProgressView.this.progress = i;
                     postInvalidate();
                 }
+                isScroller = false;
             }
         }).start();
-
     }
 
     public void drawProgress(Canvas canvas, int progress){

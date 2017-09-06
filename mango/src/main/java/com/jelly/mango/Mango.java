@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public class Mango {
-    public static final String TAG = "Mango";
+    public static final String TAG = Mango.class.getName();
     public static ImageSelectListener imageSelectListener;
     public static List<MultiplexImage> images;
     public static int position = 0;

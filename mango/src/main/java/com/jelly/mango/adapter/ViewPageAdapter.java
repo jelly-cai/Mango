@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.jelly.mango.ImageBrowseActivity;
 import com.jelly.mango.MultiplexImage;
 import com.jelly.mango.R;
 import com.jelly.mango.progressGlide.GlideApp;
@@ -34,7 +35,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  */
 public class ViewPageAdapter extends PagerAdapter {
 
-    private static String TAG = ViewPageAdapter.class.getName();
+    private static final String TAG = ViewPageAdapter.class.getName();
 
     private Context context;
     private List<MultiplexImage> images;
@@ -63,8 +64,7 @@ public class ViewPageAdapter extends PagerAdapter {
             viewHolder.progressView = (RingProgressView) view.findViewById(R.id.progress);
             viewHolder.oImage = (ImageView) view.findViewById(R.id.oImage);
 
-            viewHolder.progressView.clearProgress();
-            viewHolder.progressView.setProgress(2);
+            viewHolder.progressView.initProgress();
 
             //if is load original image before,hidden thumbnails ImageView and load original image
             if(images.get(position).isLoading()){
@@ -105,7 +105,6 @@ public class ViewPageAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         View view = (View) object;
         container.removeView(view);
-        Log.d(TAG, "destroyItem: "+images.size());
     }
 
     /**
@@ -201,19 +200,14 @@ public class ViewPageAdapter extends PagerAdapter {
      */
     public void loadOriginalPicture(){
         //If is loading,return
-        if(images.get(position).isLoading()){
-            return;
-        }
         images.get(position).setLoading(true);
+        ((ImageBrowseActivity)context).hiddenOriginalButton(position);
         View view = cacheView.get(position) != null ? cacheView.get(position).get() : null;
         if(view != null) {
             ViewHolder viewHolder = (ViewHolder) view.getTag();
             viewHolder.progressView.setVisibility(View.VISIBLE);
-            viewHolder.progressView.setProgress(0);
             viewHolder.photoViewAttacher = new PhotoViewAttacher(viewHolder.oImage);
-
-            viewHolder.progressView.clearProgress();
-            viewHolder.progressView.setProgress(2);
+            viewHolder.progressView.initProgress();
 
             glideLoadImage(viewHolder.photoViewAttacher, viewHolder.progressView, viewHolder.image, position, true);
         }

@@ -37,7 +37,8 @@ import okio.Source;
 
 @GlideModule
 public class OkHttpGlideModule extends AppGlideModule{
-    public static final String TAG = "GlideModule";
+
+    private static final String TAG = OkHttpGlideModule.class.getName();
 
     @Override public void applyOptions(Context context, GlideBuilder builder) {	}
     @Override public void registerComponents(Context context, Glide glide, Registry registry) {

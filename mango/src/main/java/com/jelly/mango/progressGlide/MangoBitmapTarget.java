@@ -12,6 +12,8 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class MangoBitmapTarget extends ImageViewTarget<Bitmap> {
 
+    private static final String TAG = MangoBitmapTarget.class.getName();
+
     private PhotoViewAttacher photoViewAttacher;
 
     public MangoBitmapTarget(PhotoViewAttacher photoViewAttacher) {

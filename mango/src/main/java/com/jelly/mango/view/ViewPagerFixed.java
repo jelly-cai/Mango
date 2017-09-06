@@ -6,6 +6,8 @@ import android.view.MotionEvent;
 
 public class ViewPagerFixed extends android.support.v4.view.ViewPager {
 
+    private static final String TAG = ViewPagerFixed.class.getName();
+
     public ViewPagerFixed(Context context) {
         super(context);
     }

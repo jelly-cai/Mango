@@ -15,6 +15,8 @@ import android.util.AttributeSet;
 
 public class TextImageButton extends AppCompatTextView{
 
+    private static final String TAG = TextImageButton.class.getName();
+
     public TextImageButton(Context context) {
         super(context);
     }

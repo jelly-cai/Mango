@@ -81,6 +81,15 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
         
     }
 
+    public void hiddenOriginalButton(int position){
+        //f the image is load original,hidden show original button
+        if(presenter.getImages().get(position).isLoading()){
+            origin.setVisibility(View.GONE);
+        }else{
+            origin.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     public void onPageSelected(int position) {
         adapter.setPosition(position);
@@ -88,6 +97,7 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
         if(Mango.imageSelectListener != null){
             Mango.imageSelectListener.select(position);
         }
+        hiddenOriginalButton(position);
     }
 
     @Override

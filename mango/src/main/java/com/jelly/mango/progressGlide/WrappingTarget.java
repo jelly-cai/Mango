@@ -10,6 +10,8 @@ import com.bumptech.glide.request.transition.Transition;
 
 public class WrappingTarget<Z> implements Target<Z> {
 
+    private static final String TAG = WrappingTarget.class.getName();
+
     protected final @NonNull Target<? super Z> target;
 
     public WrappingTarget(@NonNull Target<? super Z> target) {

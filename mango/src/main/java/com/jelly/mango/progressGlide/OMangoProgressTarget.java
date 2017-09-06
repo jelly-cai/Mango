@@ -13,6 +13,7 @@ import com.jelly.mango.progressview.RingProgressView;
  */
 
 public class OMangoProgressTarget<Z> extends ProgressTarget<String, Z> {
+    private static final String TAG = OMangoProgressTarget.class.getName();
     private RingProgressView progressView;
     private ImageView image;
 

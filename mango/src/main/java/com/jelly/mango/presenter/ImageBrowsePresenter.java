@@ -21,11 +21,12 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * ImageBrowsePresenter
  * Created by Jelly on 2016/9/3.
  */
 public class ImageBrowsePresenter {
 
-    private final static String TAG = ImageBrowsePresenter.class.getName();
+    private static final String TAG = ImageBrowsePresenter.class.getName();
 
     private ImageBrowseView view;
     private List<MultiplexImage> images;

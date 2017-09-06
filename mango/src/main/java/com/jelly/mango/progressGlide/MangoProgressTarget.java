@@ -13,6 +13,7 @@ import com.jelly.mango.progressview.RingProgressView;
 
 public class MangoProgressTarget<Z> extends ProgressTarget<String, Z> {
 
+    private static final String TAG = MangoProgressTarget.class.getName();
     private RingProgressView progressView;
 
     public MangoProgressTarget(Context context, Target<Z> target, RingProgressView progressView) {

@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient;
  */
 public class OkHttpUrlLoader implements ModelLoader<GlideUrl, InputStream> {
 
+  private static final String TAG = OkHttpUrlLoader.class.getName();
   private final Call.Factory client;
 
   public OkHttpUrlLoader(Call.Factory client) {

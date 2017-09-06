@@ -11,6 +11,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class MangoGIFDrawableTarget extends ImageViewTarget<GifDrawable> {
 
+    private static final String TAG = MangoGIFDrawableTarget.class.getName();
     private PhotoViewAttacher photoViewAttacher;
 
     public MangoGIFDrawableTarget(PhotoViewAttacher photoViewAttacher) {
