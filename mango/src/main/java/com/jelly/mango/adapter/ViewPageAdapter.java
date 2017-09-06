@@ -200,6 +200,8 @@ public class ViewPageAdapter extends PagerAdapter {
      */
     public void loadOriginalPicture(){
         //If is loading,return
+        if(images.get(position).isLoading()) return;
+
         images.get(position).setLoading(true);
         ((ImageBrowseActivity)context).hiddenOriginalButton(position);
         View view = cacheView.get(position) != null ? cacheView.get(position).get() : null;
