@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,8 +54,6 @@ public class ViewPageAdapter extends PagerAdapter {
         if(containerTemp == null) containerTemp = container;
         View view = cacheView.get(position) != null ? cacheView.get(position).get() : null;
         if(view == null){
-
-            Log.d(TAG, "instantiateItem: "+position);
 
             view = LayoutInflater.from(context).inflate(R.layout.vp_item_image,container,false);
             ViewHolder viewHolder = new ViewHolder();

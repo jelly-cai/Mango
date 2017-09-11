@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jelly.mango.adapter.ViewPageAdapter;
+import com.jelly.mango.component.DaggerActivityComponent;
 import com.jelly.mango.presenter.ImageBrowsePresenter;
 import com.jelly.mango.progressview.TextImageButton;
 import com.jelly.mango.view.ImageBrowseView;
@@ -42,6 +43,10 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
         origin.setOnClickListener(this);
         initPresenter();
         presenter.loadImage();
+    }
+
+    public void inject(){
+        DaggerActivityComponent.builder().build().inject(this);
     }
 
     public void initPresenter(){
