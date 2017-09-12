@@ -10,11 +10,14 @@ import android.widget.TextView;
 
 import com.jelly.mango.adapter.ViewPageAdapter;
 import com.jelly.mango.component.DaggerActivityComponent;
+import com.jelly.mango.module.ActivityModule;
 import com.jelly.mango.presenter.ImageBrowsePresenter;
 import com.jelly.mango.progressview.TextImageButton;
 import com.jelly.mango.view.ImageBrowseView;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Created by Jelly on 2016/9/3.
@@ -28,7 +31,8 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
     private TextImageButton save;
     private TextImageButton origin;
     private ViewPageAdapter adapter;
-    private ImageBrowsePresenter presenter;
+    @Inject
+    ImageBrowsePresenter presenter;
 
 
     @Override
@@ -41,16 +45,12 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
         origin = (TextImageButton) this.findViewById(R.id.origin);
         save.setOnClickListener(this);
         origin.setOnClickListener(this);
-        initPresenter();
+        inject();
         presenter.loadImage();
     }
 
     public void inject(){
-        DaggerActivityComponent.builder().build().inject(this);
-    }
-
-    public void initPresenter(){
-        presenter = new ImageBrowsePresenter(this);
+        DaggerActivityComponent.builder().activityModule(new ActivityModule(this)).build().inject(this);
     }
 
     @Override
