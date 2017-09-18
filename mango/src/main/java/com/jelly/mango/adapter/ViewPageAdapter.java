@@ -196,6 +196,8 @@ public class ViewPageAdapter extends PagerAdapter {
      * Start original image
      */
     public void loadOriginalPicture(){
+        //If is not exists original image,return
+        if(TextUtils.isEmpty(images.get(position).getOPath())) return;
         //If is loading,return
         if(images.get(position).isLoading()) return;
 

@@ -36,8 +36,6 @@ dependencies {
     annotationProcessor  "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
     //okhttp
     compile "com.squareup.okhttp3:okhttp:${OKHTTP3_VERSION}"
-    compile "com.google.dagger:dagger:${DAGGER2}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER2}"
 }
 
 publish {
