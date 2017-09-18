@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -82,7 +83,7 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
 
     public void hiddenOriginalButton(int position){
         //f the image is load original,hidden show original button
-        if(presenter.getImages().get(position).isLoading()){
+        if(presenter.getImages().get(position).isLoading() || TextUtils.isEmpty(presenter.getImages().get(position).getOPath())){
             origin.setVisibility(View.GONE);
         }else{
             origin.setVisibility(View.VISIBLE);

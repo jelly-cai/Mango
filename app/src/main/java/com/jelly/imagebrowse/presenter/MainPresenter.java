@@ -24,7 +24,7 @@ public class MainPresenter {
         images.add(new MultiplexImage("http://tulian.net/images/2017/09/02/IMG_09109f57a.th.jpg","http://tulian.net/images/2017/09/02/IMG_09109f57a.md.jpg",MultiplexImage.ImageType.NORMAL));
         images.add(new MultiplexImage("http://tulian.net/images/2017/09/02/IMG_0983b6454.th.jpg","http://tulian.net/images/2017/09/02/IMG_0983b6454.jpg",MultiplexImage.ImageType.NORMAL));
         images.add(new MultiplexImage("http://tulian.net/images/2017/09/02/IMG_098592f0f.th.jpg","http://tulian.net/images/2017/09/02/IMG_098592f0f.jpg", MultiplexImage.ImageType.NORMAL));
-        images.add(new MultiplexImage("http://tulian.net/images/2017/09/02/IMG_09885300c.th.jpg","http://tulian.net/images/2017/09/02/IMG_09885300c.jpg",MultiplexImage.ImageType.NORMAL));
+        images.add(new MultiplexImage("http://tulian.net/images/2017/09/02/IMG_09885300c.th.jpg",null,MultiplexImage.ImageType.NORMAL));
         view.setImages(images);
         view.initRecycler();
     }
