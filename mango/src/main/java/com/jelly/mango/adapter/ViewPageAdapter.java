@@ -37,10 +37,18 @@ public class ViewPageAdapter extends PagerAdapter {
     private static final String TAG = ViewPageAdapter.class.getName();
 
     private Context context;
+    /**
+     * Image source
+     */
     private List<MultiplexImage> images;
     private SparseArray<SoftReference<View>> cacheView;
-    private ViewGroup containerTemp;
+    /**
+     * Previous Position
+     */
     private int prePosition;
+    /**
+     * Curr Position
+     */
     private int position;
 
     public ViewPageAdapter(Context context, List<MultiplexImage> images) {
@@ -51,7 +59,6 @@ public class ViewPageAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(final ViewGroup container, int position) {
-        if(containerTemp == null) containerTemp = container;
         View view = cacheView.get(position) != null ? cacheView.get(position).get() : null;
         if(view == null){
 
@@ -158,7 +165,6 @@ public class ViewPageAdapter extends PagerAdapter {
      * @param isO whether
      */
     public void glideLoadImage(PhotoViewAttacher photoViewAttacher,RingProgressView progressView,ImageView image,int position,boolean isO){
-
         int type = images.get(position).getType(); //image type
         //get image url(Thumbnails or Original)
         String model = null;
@@ -191,7 +197,6 @@ public class ViewPageAdapter extends PagerAdapter {
 
     }
 
-
     /**
      * Start original image
      */
@@ -223,6 +228,5 @@ public class ViewPageAdapter extends PagerAdapter {
         RingProgressView progressView;
         PhotoViewAttacher photoViewAttacher;
     }
-
 
 }

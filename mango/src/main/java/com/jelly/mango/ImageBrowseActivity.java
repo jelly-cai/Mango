@@ -34,14 +34,21 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_image_browse);
+        initView();
+        loadPresenter();
+        presenter.loadImage();
+    }
+
+    /**
+     * init view
+     */
+    public void initView(){
         vp = (ViewPager) this.findViewById(R.id.viewPager);
         hint = (TextView) this.findViewById(R.id.hint);
         save = (TextImageButton) this.findViewById(R.id.save);
         origin = (TextImageButton) this.findViewById(R.id.origin);
         save.setOnClickListener(this);
         origin.setOnClickListener(this);
-        loadPresenter();
-        presenter.loadImage();
     }
 
     public void loadPresenter(){
@@ -83,7 +90,7 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
 
     public void hiddenOriginalButton(int position){
         //f the image is load original,hidden show original button
-        if(presenter.getImages().get(position).isLoading() || TextUtils.isEmpty(presenter.getImages().get(position).getOPath())){
+        if(TextUtils.isEmpty(presenter.getImages().get(position).getOPath()) || presenter.getImages().get(position).isLoading()){
             origin.setVisibility(View.GONE);
         }else{
             origin.setVisibility(View.VISIBLE);

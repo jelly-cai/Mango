@@ -17,10 +17,9 @@ public class Mango {
     public static List<MultiplexImage> images;
     public static int position = 0;
 
-    public static void open(Context context) throws Exception{
-
+    public static void open(Context context) throws IllegalAccessError{
         if(images == null){
-            throw new Exception("must set imageUrls");
+            throw new IllegalAccessError("must set imageUrls");
         }
 
         Intent intent = new Intent(context,ImageBrowseActivity.class);
