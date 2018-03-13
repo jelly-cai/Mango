@@ -3,6 +3,7 @@ package com.jelly.mango.presenter;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -30,8 +31,6 @@ public class ImageBrowsePresenter {
 
     private ImageBrowseView view;
     private List<MultiplexImage> images;
-    private String[] imageTypes = new String[] { ".jpg",".png", ".jpeg","webp"};
-
     public ImageBrowsePresenter(ImageBrowseView view) {
         this.view = view;
     }
@@ -44,42 +43,19 @@ public class ImageBrowsePresenter {
 
     public void saveImage() {
 
-        final String imageUrl = getPositionImage().getOPath();
+        final String imageUrl = !TextUtils.isEmpty(getPositionImage().getOPath()) ? getPositionImage().getOPath(): getPositionImage().getTPath();
 
         GlideApp.with(view.getMyContext()).asBitmap().load(imageUrl).into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                // 创建目录
-                File appDir = new File(Environment.getExternalStorageDirectory(), "mango");
-                if (!appDir.exists()) {
-                    appDir.mkdir();
-                }
-
-                String imageType = getImageType(imageUrl); //获取图片类型
-                String fileName = System.currentTimeMillis() + "." + imageType;
-                File file = new File(appDir, fileName);
-                //保存图片
-                try {
-                    FileOutputStream fos = new FileOutputStream(file);
-                    if (TextUtils.equals(imageType, "jpg")) imageType = "jpeg";
-                    imageType = imageType.toUpperCase();
-                    resource.compress(Bitmap.CompressFormat.valueOf(imageType), 100, fos);
-                    fos.flush();
-                    fos.close();
-                    Toast.makeText(view.getMyContext(), "保存成功", Toast.LENGTH_SHORT).show(); //Toast
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
                 // 其次把文件插入到系统图库
-                try {
-                    MediaStore.Images.Media.insertImage(view.getMyContext().getContentResolver(), file.getAbsolutePath(), fileName, null);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                MediaStore.Images.Media.insertImage(view.getMyContext().getContentResolver(),resource,"title", "description");
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+                    view.getMyContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+                }else{
+                    view.getMyContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
                 }
-                view.getMyContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file.getPath())));
+                Toast.makeText(view.getMyContext(),"保存成功",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -91,18 +67,6 @@ public class ImageBrowsePresenter {
 
     public List<MultiplexImage> getImages() {
         return images;
-    }
-
-    public String getImageType(String imageUrl){
-        String imageType = "";
-        if(imageUrl.endsWith(imageTypes[0])){
-            imageType = "jpg";
-        }else if(imageUrl.endsWith(imageTypes[1])){
-            imageType = "png";
-        }else{
-            imageType = "jpeg";
-        }
-        return imageType;
     }
 
 }

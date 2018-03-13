@@ -21,10 +21,10 @@ public class MainPresenter {
     public void loadImage() {
         if (images == null) images = new ArrayList<MultiplexImage>();
 
-        images.add(new MultiplexImage("http://tulian.net/images/2017/09/02/IMG_09109f57a.th.jpg","http://tulian.net/images/2017/09/02/IMG_09109f57a.md.jpg",MultiplexImage.ImageType.NORMAL));
-        images.add(new MultiplexImage("http://tulian.net/images/2017/09/02/IMG_0983b6454.th.jpg","http://tulian.net/images/2017/09/02/IMG_0983b6454.jpg",MultiplexImage.ImageType.NORMAL));
-        images.add(new MultiplexImage("http://tulian.net/images/2017/09/02/IMG_098592f0f.th.jpg","http://tulian.net/images/2017/09/02/IMG_098592f0f.jpg", MultiplexImage.ImageType.NORMAL));
-        images.add(new MultiplexImage("http://tulian.net/images/2017/09/02/IMG_09885300c.th.jpg",null,MultiplexImage.ImageType.NORMAL));
+        images.add(new MultiplexImage("http://img07.tooopen.com/images/20170412/tooopen_sy_205649374814.jpg",MultiplexImage.ImageType.NORMAL));
+        images.add(new MultiplexImage("https://i3.wenshen520.com/25257_0.jpg",MultiplexImage.ImageType.NORMAL));
+        images.add(new MultiplexImage("https://truth.bahamut.com.tw/s01/201601/88f5d73bb1e77e536bdd3e619bb041aa.JPG",MultiplexImage.ImageType.NORMAL));
+        images.add(new MultiplexImage("http://a3.att.hudong.com/26/50/19300534462526138123508838344_950.jpg",MultiplexImage.ImageType.NORMAL));
         view.setImages(images);
         view.initRecycler();
     }

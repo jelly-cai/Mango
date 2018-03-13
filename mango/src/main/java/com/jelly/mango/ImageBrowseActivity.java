@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -72,15 +73,15 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
 
     @Override
     public void setImageBrowse(List<MultiplexImage> images,int position) {
-
         if(adapter == null && images != null && images.size() != 0){
             adapter = new ViewPageAdapter(this,images);
+            hiddenOriginalButton(position);
             vp.setAdapter(adapter);
             vp.setCurrentItem(position);
             vp.addOnPageChangeListener(this);
+            adapter.setPosition(position);
             hint.setText(position + 1 + "/" + images.size());
         }
-
     }
 
     @Override
@@ -89,7 +90,7 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
     }
 
     public void hiddenOriginalButton(int position){
-        //f the image is load original,hidden show original button
+        //if the image is load original,hidden show original button
         if(TextUtils.isEmpty(presenter.getImages().get(position).getOPath()) || presenter.getImages().get(position).isLoading()){
             origin.setVisibility(View.GONE);
         }else{
@@ -122,7 +123,6 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
         }else if(id == R.id.origin){
             adapter.loadOriginalPicture();
         }
-
     }
 
     @Override

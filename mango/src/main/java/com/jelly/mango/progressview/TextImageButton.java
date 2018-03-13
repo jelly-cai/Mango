@@ -33,14 +33,11 @@ public class TextImageButton extends AppCompatTextView{
         paint.setARGB(50,100,100,100);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);
-        canvas.drawRoundRect(new RectF(0,0,width,height),13,13,paint);
+        canvas.drawRoundRect(new RectF(0,0,width,height),25,25,paint);
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.WHITE);
-        canvas.drawRoundRect(new RectF(0,0,width,height),13,13,paint);
+        canvas.drawRoundRect(new RectF(0,0,width,height),25,25,paint);
         super.onDraw(canvas);
-
     }
-
-
 
 }

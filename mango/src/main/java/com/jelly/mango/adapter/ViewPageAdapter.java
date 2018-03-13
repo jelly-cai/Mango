@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +62,6 @@ public class ViewPageAdapter extends PagerAdapter {
     public Object instantiateItem(final ViewGroup container, int position) {
         View view = cacheView.get(position) != null ? cacheView.get(position).get() : null;
         if(view == null){
-
             view = LayoutInflater.from(context).inflate(R.layout.vp_item_image,container,false);
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.image = (ImageView) view.findViewById(R.id.image);
@@ -86,11 +86,9 @@ public class ViewPageAdapter extends PagerAdapter {
                     activity.finish();
                 }
             });
-
             view.setTag(viewHolder);
             cacheView.put(position,new SoftReference(view));
         }
-
         container.addView(view);
         return view;
     }
@@ -205,7 +203,6 @@ public class ViewPageAdapter extends PagerAdapter {
         if(TextUtils.isEmpty(images.get(position).getOPath())) return;
         //If is loading,return
         if(images.get(position).isLoading()) return;
-
         images.get(position).setLoading(true);
         ((ImageBrowseActivity)context).hiddenOriginalButton(position);
         View view = cacheView.get(position) != null ? cacheView.get(position).get() : null;

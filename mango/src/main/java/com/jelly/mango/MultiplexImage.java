@@ -32,6 +32,11 @@ public class MultiplexImage implements Parcelable {
         this.type = type;
     }
 
+    public MultiplexImage(String TPath, int type){
+        this.TPath = TPath;
+        this.type = type;
+    }
+
     public String getOPath() {
         return OPath;
     }
