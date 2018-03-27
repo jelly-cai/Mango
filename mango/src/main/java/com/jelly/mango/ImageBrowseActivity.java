@@ -35,6 +35,7 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_image_browse);
+        getSupportActionBar().hide();
         initView();
         loadPresenter();
         presenter.loadImage();
