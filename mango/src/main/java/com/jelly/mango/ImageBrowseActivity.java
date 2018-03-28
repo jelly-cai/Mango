@@ -1,18 +1,25 @@
 package com.jelly.mango;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jelly.mango.adapter.ViewPageAdapter;
 import com.jelly.mango.presenter.ImageBrowsePresenter;
 import com.jelly.mango.progressview.TextImageButton;
+import com.jelly.mango.util.StatusBarUtils;
 import com.jelly.mango.view.ImageBrowseView;
 
 import java.util.List;
@@ -35,8 +42,9 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_image_browse);
-        getSupportActionBar().hide();
         initView();
+        hideToolBar();
+        setStatusBar();
         loadPresenter();
         presenter.loadImage();
     }
@@ -44,13 +52,27 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
     /**
      * init view
      */
-    public void initView(){
+    private void initView(){
         vp = (ViewPager) this.findViewById(R.id.viewPager);
         hint = (TextView) this.findViewById(R.id.hint);
         save = (TextImageButton) this.findViewById(R.id.save);
         origin = (TextImageButton) this.findViewById(R.id.origin);
         save.setOnClickListener(this);
         origin.setOnClickListener(this);
+    }
+
+    /**
+     * hide toolbar
+     */
+    private void hideToolBar(){
+        getSupportActionBar().hide();
+    }
+
+    /**
+     * set status bar color
+     */
+    private void setStatusBar(){
+        StatusBarUtils.setStatusBar(this,Color.BLACK);
     }
 
     public void loadPresenter(){
