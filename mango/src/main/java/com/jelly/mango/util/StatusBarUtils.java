@@ -53,7 +53,6 @@ public class StatusBarUtils {
      * @return View
      */
     private static View createStatusBarView(Activity activity, @ColorInt int color) {
-        // 绘制一个和状态栏一样高的矩形
         View statusBarView = new View(activity);
         LinearLayout.LayoutParams params =
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));
