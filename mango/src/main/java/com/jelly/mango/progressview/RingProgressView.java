@@ -1,5 +1,6 @@
 package com.jelly.mango.progressview;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -19,7 +20,6 @@ public class RingProgressView extends View {
     private Paint paint;
     private Context context;
     private int progress = 0;
-    private boolean isScroller = false;
 
     public RingProgressView(Context context) {
         super(context);
@@ -53,26 +53,17 @@ public class RingProgressView extends View {
             invalidate();
             return;
         }
-        if(isScroller) return;
 
-        final int curProgress = this.progress;
-        new Thread(new Runnable() {
+        ValueAnimator animator = ValueAnimator.ofInt(this.progress,progress);
+        animator.setDuration(300);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void run() {
-                isScroller = true;
-                for(int i=curProgress;i<progress;i++){
-                    try {
-                        Thread.sleep(20);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    Log.d(TAG, "run: "+i);
-                    RingProgressView.this.progress = i;
-                    postInvalidate();
-                }
-                isScroller = false;
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                RingProgressView.this.progress = (int) valueAnimator.getAnimatedValue();
+                postInvalidate();
             }
-        }).start();
+        });
+        animator.start();
     }
 
     public void drawProgress(Canvas canvas, int progress){

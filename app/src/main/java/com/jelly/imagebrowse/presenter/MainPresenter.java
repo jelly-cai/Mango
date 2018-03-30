@@ -24,7 +24,7 @@ public class MainPresenter {
         images.add(new MultiplexImage("http://img07.tooopen.com/images/20170412/tooopen_sy_205649374814.jpg",MultiplexImage.ImageType.NORMAL));
         images.add(new MultiplexImage("https://i3.wenshen520.com/25257_0.jpg",MultiplexImage.ImageType.NORMAL));
         images.add(new MultiplexImage("https://truth.bahamut.com.tw/s01/201601/88f5d73bb1e77e536bdd3e619bb041aa.JPG",MultiplexImage.ImageType.NORMAL));
-        images.add(new MultiplexImage("http://a3.att.hudong.com/26/50/19300534462526138123508838344_950.jpg",MultiplexImage.ImageType.NORMAL));
+        images.add(new MultiplexImage("http://i4.bvimg.com/607307/a513fbc3203a3e53s.jpg","http://i4.bvimg.com/607307/a513fbc3203a3e53.jpg",MultiplexImage.ImageType.NORMAL));
         view.setImages(images);
         view.initRecycler();
     }
