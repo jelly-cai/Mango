@@ -87,7 +87,7 @@ public class ViewPageAdapter extends PagerAdapter {
                 }
             });
             view.setTag(viewHolder);
-            cacheView.put(position,new SoftReference(view));
+            cacheView.put(position,new SoftReference<>(view));
         }
         container.addView(view);
         return view;

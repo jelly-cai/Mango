@@ -1,5 +1,7 @@
 package com.jelly.mango.progressview;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -20,6 +22,14 @@ public class RingProgressView extends View {
     private Paint paint;
     private Context context;
     private int progress = 0;
+    /**
+     * is play animator
+     */
+    private boolean isAnimPlay = false;
+    /**
+     * last waiting progress animator
+     */
+    private int lastProgress;
 
     public RingProgressView(Context context) {
         super(context);
@@ -45,22 +55,48 @@ public class RingProgressView extends View {
         setProgress(3);
     }
 
-    public void setProgress(final int progress) {
-
+    public void setProgress(int progress) {
         if(progress < this.progress) return;
-        if(progress - this.progress < 5){
-            this.progress = progress;
-            invalidate();
+        //handle is playing
+        if(isAnimPlay){
+            lastProgress = progress;
             return;
         }
 
+        playProgressAnimator(progress);
+    }
+
+    /**
+     * play progress animator
+     * @param progress
+     */
+    private void playProgressAnimator(int progress){
         ValueAnimator animator = ValueAnimator.ofInt(this.progress,progress);
         animator.setDuration(300);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 RingProgressView.this.progress = (int) valueAnimator.getAnimatedValue();
-                postInvalidate();
+                invalidate();
+            }
+        });
+        animator.addListener(new AnimatorListenerAdapter() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                isAnimPlay = true;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                isAnimPlay = false;
+
+                if(lastProgress > RingProgressView.this.progress){
+                    playProgressAnimator(RingProgressView.this.lastProgress);
+                } else if (RingProgressView.this.progress == 100) {
+                    RingProgressView.this.setVisibility(GONE);
+                }
+
             }
         });
         animator.start();
@@ -69,16 +105,17 @@ public class RingProgressView extends View {
     public void drawProgress(Canvas canvas, int progress){
         int centerX = getWidth()/2;
         int centerY = getHeight()/2;
-        int innerCircle = dip2px(context, 18); //设置内圆半径
-        int ringWidth = dip2px(context, 5); //设置圆环宽度
-        //绘制外圆
+        //set inner circle radius
+        int innerCircle = dip2px(context, 18);
+        //set ring circle wight
+        int ringWidth = dip2px(context, 5);
+        //draw outer circle
         this.paint.setARGB(255, 255 ,255, 255);
         int left = centerX - innerCircle;
         int top = centerY - innerCircle;
         int right = centerX + innerCircle;
         int bottom = centerY + innerCircle;
         paint.setStrokeWidth(ringWidth);
-
         canvas.drawArc(new RectF(left,top,right,bottom),-90, (float) (progress * 3.6),false,paint);
     }
 

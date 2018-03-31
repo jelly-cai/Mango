@@ -1,6 +1,7 @@
 package com.jelly.mango.progressGlide;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -41,7 +42,10 @@ public class OMangoProgressTarget<Z> extends ProgressTarget<String, Z> {
 
     @Override
     protected void onDownloaded() {
+    }
 
+    @Override
+    public void onStop() {
     }
 
     /**
@@ -53,7 +57,6 @@ public class OMangoProgressTarget<Z> extends ProgressTarget<String, Z> {
     @Override
     protected void onDelivered() {
         progressView.setProgress(100);
-        progressView.setVisibility(View.INVISIBLE);
         image.setVisibility(View.INVISIBLE);
     }
 }
