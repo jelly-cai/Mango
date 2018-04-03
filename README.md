@@ -6,10 +6,10 @@ Mango是一款用来方便实现图片浏览的控件
 	compile 'com.jelly:mango:1.2.1'
 #### 具体使用
 #### 快速开始
-	setImages(List<MultiplexImage> images) //设置图片源
-	setPosition(int position) //设置初始显示位置
-	setImageSelectListener(ImageSelectListener listener) //设置滚动监听
-	open(Context context) //开启图片浏览
+	Mango.setImages(List<MultiplexImage> images) //设置图片源
+	Mango.setPosition(int position) //设置初始显示位置
+	Mango.setImageSelectListener(ImageSelectListener listener) //设置滚动监听
+	Mango.open(Context context) //开启图片浏览
 #### 参数解释
 	MultiplexImage：图片加载源
 		构造函数
