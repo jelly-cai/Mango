@@ -10,7 +10,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentLeft="true">
 
     </com.jelly.mango.view.ViewPagerFixed>
 
@@ -28,7 +28,7 @@
         android:textColor="@android:color/white"
         android:text="0/0"/>
 
-    <com.jelly.mango.progressview.TextImageButton
+    <TextView
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,10 +40,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:textColor="@android:color/white"
+        android:background="@drawable/image_btn"
         android:textSize="12sp"
         android:text="保存"/>
 
-    <com.jelly.mango.progressview.TextImageButton
+    <TextView
         android:id="@+id/origin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,6 +56,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:textColor="@android:color/white"
+        android:background="@drawable/image_btn"
         android:textSize="12sp"
         android:text="原图"/>
 

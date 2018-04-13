@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import com.jelly.mango.adapter.ViewPageAdapter;
 import com.jelly.mango.presenter.ImageBrowsePresenter;
-import com.jelly.mango.progressview.TextImageButton;
 import com.jelly.mango.util.StatusBarUtils;
 import com.jelly.mango.view.ImageBrowseView;
 
 import java.util.List;
 
 /**
+ * Mango main Activity
  * Created by Jelly on 2016/9/3.
  */
 public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,View.OnClickListener,ImageBrowseView {
@@ -27,8 +27,8 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
 
     private ViewPager vp;
     private TextView hint;
-    private TextImageButton save;
-    private TextImageButton origin;
+    private TextView save;
+    private TextView origin;
     private ViewPageAdapter adapter;
     ImageBrowsePresenter presenter;
 
@@ -49,8 +49,8 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
     private void initView(){
         vp = (ViewPager) this.findViewById(R.id.viewPager);
         hint = (TextView) this.findViewById(R.id.hint);
-        save = (TextImageButton) this.findViewById(R.id.save);
-        origin = (TextImageButton) this.findViewById(R.id.origin);
+        save = (TextView) this.findViewById(R.id.save);
+        origin = (TextView) this.findViewById(R.id.origin);
         save.setOnClickListener(this);
         origin.setOnClickListener(this);
     }
