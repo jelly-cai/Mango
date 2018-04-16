@@ -3,7 +3,7 @@
 Mango是一款用来方便实现图片浏览的控件
 ### 使用
 #### Gradle
-	compile 'com.jelly:mango:1.2.2'
+	compile 'com.jelly:mango:1.2.3'
 #### 具体使用
 #### 快速开始
 	Mango.setImages(List<MultiplexImage> images) //设置图片源
