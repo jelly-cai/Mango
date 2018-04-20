@@ -4,6 +4,15 @@ Mango是一款用来方便实现图片浏览的控件
 ### 使用
 #### Gradle
 	compile 'com.jelly:mango:1.2.3'
+	本项目采用了以下第三方依赖:
+	compile "com.github.chrisbanes.photoview:library:1.2.4"
+	compile "com.github.bumptech.glide:glide:4.0.0"
+    annotationProcessor  "com.github.bumptech.glide:compiler:4.0.0"
+	如果自己的项目本身就存在这些相关联的依赖库(版本不同可能会发生问题)，想减少第三方依赖库的大小
+    compile ('com.jelly:mango:1.2.3'){
+        exclude group: 'com.github.chrisbanes.photoview'
+        exclude group: 'com.github.bumptech.glide'
+    }
 #### 具体使用
 #### 快速开始
 	Mango.setImages(List<MultiplexImage> images) //设置图片源
