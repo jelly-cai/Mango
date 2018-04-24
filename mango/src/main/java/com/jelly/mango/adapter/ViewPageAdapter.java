@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.jelly.mango.ImageBrowseActivity;
 import com.jelly.mango.MultiplexImage;
@@ -21,6 +22,7 @@ import com.jelly.mango.progressGlide.MangoBitmapTarget;
 import com.jelly.mango.progressGlide.MangoGIFDrawableTarget;
 import com.jelly.mango.progressGlide.MangoProgressTarget;
 import com.jelly.mango.progressGlide.OMangoProgressTarget;
+import com.jelly.mango.progressGlide.OkHttpGlideModule;
 import com.jelly.mango.progressview.RingProgressView;
 
 import java.lang.ref.SoftReference;
@@ -162,7 +164,7 @@ public class ViewPageAdapter extends PagerAdapter {
      * @param position ViewPager position
      * @param isO whether
      */
-    public void glideLoadImage(PhotoViewAttacher photoViewAttacher,RingProgressView progressView,ImageView image,int position,boolean isO){
+    public void glideLoadImage(PhotoViewAttacher photoViewAttacher, final RingProgressView progressView, ImageView image, int position, boolean isO){
         int type = images.get(position).getType(); //image type
         //get image url(Thumbnails or Original)
         String model = null;
@@ -175,21 +177,21 @@ public class ViewPageAdapter extends PagerAdapter {
             if(isO){
                 OMangoProgressTarget<GifDrawable> gifTarget = new OMangoProgressTarget<>(context, new MangoGIFDrawableTarget(photoViewAttacher), progressView,image);
                 gifTarget.setModel(model);
-                GlideApp.with(context).asGif().load(model).fitCenter().into(gifTarget);
+                GlideApp.with(context).asGif().load(model).into(gifTarget);
             }else{
                 MangoProgressTarget<GifDrawable> gifTarget = new MangoProgressTarget<>(context, new MangoGIFDrawableTarget(photoViewAttacher), progressView);
                 gifTarget.setModel(model);
-                GlideApp.with(context).asGif().load(model).fitCenter().into(gifTarget);
+                GlideApp.with(context).asGif().load(model).into(gifTarget);
             }
         }else{
             if(isO){
                 OMangoProgressTarget<Bitmap> otherTarget = new OMangoProgressTarget<>(context, new MangoBitmapTarget(photoViewAttacher),progressView,image);
                 otherTarget.setModel(model);
-                GlideApp.with(context).asBitmap().load(model).fitCenter().into(otherTarget);
+                GlideApp.with(context).asBitmap().load(model).into(otherTarget);
             }else{
                 MangoProgressTarget<Bitmap> otherTarget = new MangoProgressTarget<>(context, new MangoBitmapTarget(photoViewAttacher),progressView);
                 otherTarget.setModel(model);
-                GlideApp.with(context).asBitmap().load(model).fitCenter().into(otherTarget);
+                GlideApp.with(context).asBitmap().load(model).into(otherTarget);
             }
         }
 

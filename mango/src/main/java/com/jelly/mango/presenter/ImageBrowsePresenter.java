@@ -9,10 +9,10 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.jelly.mango.MultiplexImage;
-import com.jelly.mango.progressGlide.GlideApp;
 import com.jelly.mango.view.ImageBrowseView;
 
 import java.io.File;
@@ -45,7 +45,7 @@ public class ImageBrowsePresenter {
 
         final String imageUrl = !TextUtils.isEmpty(getPositionImage().getOPath()) ? getPositionImage().getOPath(): getPositionImage().getTPath();
 
-        GlideApp.with(view.getMyContext()).asBitmap().load(imageUrl).into(new SimpleTarget<Bitmap>() {
+        Glide.with(view.getMyContext()).asBitmap().load(imageUrl).into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                 // 其次把文件插入到系统图库

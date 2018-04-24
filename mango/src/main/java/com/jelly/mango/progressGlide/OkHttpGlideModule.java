@@ -11,6 +11,7 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
+import com.bumptech.glide.module.LibraryGlideModule;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,7 +41,6 @@ public class OkHttpGlideModule extends AppGlideModule{
 
     private static final String TAG = OkHttpGlideModule.class.getName();
 
-    @Override public void applyOptions(Context context, GlideBuilder builder) {	}
     @Override public void registerComponents(Context context, Glide glide, Registry registry) {
         OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(createInterceptor(new DispatchingProgressListener())).build();
         registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(client));
