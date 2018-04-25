@@ -49,6 +49,5 @@ public class MangoProgressTarget<Z> extends ProgressTarget<String, Z> {
     @Override
     protected void onDelivered() {
         progressView.setProgress(100);
-        progressView.setVisibility(View.INVISIBLE);
     }
 }

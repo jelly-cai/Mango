@@ -42,6 +42,7 @@ public class OMangoProgressTarget<Z> extends ProgressTarget<String, Z> {
 
     @Override
     protected void onDownloaded() {
+
     }
 
     @Override

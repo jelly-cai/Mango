@@ -52,6 +52,7 @@ public class RingProgressView extends View {
 
     public void initProgress(){
         progress = 0;
+        lastProgress = 0;
         setProgress(3);
     }
 
