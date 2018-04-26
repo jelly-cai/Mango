@@ -39,7 +39,7 @@ publish {
     userOrg = 'jellycai'      //bintray注册的用户名
     groupId = 'com.jelly'         //compile引用时的第1部分groupId
     artifactId = 'mango'     //compile引用时的第2部分项目名
-    publishVersion = '1.2.3'    //compile引用时的第3部分版本号
+    publishVersion = '1.3.0'    //compile引用时的第3部分版本号
     desc = 'This is android browse image library'
     website = 'https://github.com/JellyCai1995/Mango'
 }

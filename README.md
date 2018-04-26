@@ -10,7 +10,7 @@ Mango是一款用来方便实现图片浏览的控件
     compile "com.github.bumptech.glide:glide:4.0.0"
     annotationProcessor  "com.github.bumptech.glide:compiler:4.0.0"
     如果自己的项目本身就存在这些相关联的依赖库(版本不同可能会发生问题)，想减少第三方依赖库的大小
-    compile ('com.jelly:mango:1.2.3'){
+    compile ('com.jelly:mango:1.3.0'){
         exclude group: 'com.github.chrisbanes.photoview'
         exclude group: 'com.github.bumptech.glide'
     }
