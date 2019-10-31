@@ -3,7 +3,7 @@
 Mango是一款用来方便实现图片浏览的控件
 ### 使用
 #### Gradle
-	compile 'com.jelly:mango:1.3.0'
+	compile 'com.jelly:mango:1.3.2'
 #### 如果想减小第三方依赖的大小
     本项目采用了以下第三方依赖:
     compile "com.github.chrisbanes.photoview:library:1.2.4"
@@ -13,6 +13,7 @@ Mango是一款用来方便实现图片浏览的控件
     compile ('com.jelly:mango:1.3.0'){
         exclude group: 'com.github.chrisbanes.photoview'
         exclude group: 'com.github.bumptech.glide'
+        exclude group: 'com.squareup.okhttp3'
     }
 #### 具体使用
 #### 快速开始

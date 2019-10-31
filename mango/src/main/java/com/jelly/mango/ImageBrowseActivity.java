@@ -59,7 +59,9 @@ public class ImageBrowseActivity extends AppCompatActivity implements ViewPager.
      * hide toolbar
      */
     private void hideToolBar(){
-        getSupportActionBar().hide();
+        if(getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
     }
 
     /**
