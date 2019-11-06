@@ -16,6 +16,10 @@ public class Mango {
     public static ImageSelectListener imageSelectListener;
     public static List<MultiplexImage> images;
     public static int position = 0;
+    /**
+     * is show Loading
+     */
+    public static boolean isShowLoading = true;
 
     public static void open(Context context) throws IllegalAccessError{
         if(images == null){
@@ -40,6 +44,7 @@ public class Mango {
         Mango.imageSelectListener = listener;
     }
 
-
-
+    public static void setIsShowLoading(boolean isShowLoading) {
+        Mango.isShowLoading = isShowLoading;
+    }
 }

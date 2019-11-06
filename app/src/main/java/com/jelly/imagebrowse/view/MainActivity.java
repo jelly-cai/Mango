@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
                     Mango.setImages(images);
                     Mango.setPosition(position);
+                    Mango.setIsShowLoading(false);
                     Mango.setImageSelectListener(new ImageSelectListener() {
                         @Override
                         public void select(int index) {

@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.jelly.mango.ImageBrowseActivity;
+import com.jelly.mango.Mango;
 import com.jelly.mango.MultiplexImage;
 import com.jelly.mango.R;
 import com.jelly.mango.progressGlide.GlideApp;
@@ -71,7 +72,11 @@ public class ViewPageAdapter extends PagerAdapter {
             viewHolder.progressView = (RingProgressView) view.findViewById(R.id.progress);
             viewHolder.oImage = (ImageView) view.findViewById(R.id.oImage);
 
-            viewHolder.progressView.initProgress();
+            if(Mango.isShowLoading){
+                viewHolder.progressView.initProgress();
+            }else{
+                viewHolder.progressView.setVisibility(View.GONE);
+            }
 
             //if is load original image before,hidden thumbnails ImageView and load original image
             if(images.get(position).isLoading()){

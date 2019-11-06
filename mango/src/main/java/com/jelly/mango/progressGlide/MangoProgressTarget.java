@@ -1,7 +1,6 @@
 package com.jelly.mango.progressGlide;
 
 import android.content.Context;
-import android.view.View;
 
 import com.bumptech.glide.request.target.Target;
 import com.jelly.mango.progressview.RingProgressView;

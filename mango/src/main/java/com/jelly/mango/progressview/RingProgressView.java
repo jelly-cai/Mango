@@ -12,6 +12,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.jelly.mango.Mango;
+
 /**
  * Created by Jelly on 2017/8/31.
  */
@@ -47,19 +49,19 @@ public class RingProgressView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        drawProgress(canvas,progress);
+        drawProgress(canvas, progress);
     }
 
-    public void initProgress(){
+    public void initProgress() {
         progress = 0;
         lastProgress = 0;
         setProgress(3);
     }
 
     public void setProgress(int progress) {
-        if(progress < this.progress) return;
+        if (progress < this.progress) return;
         //handle is playing
-        if(isAnimPlay){
+        if (isAnimPlay) {
             lastProgress = progress;
             return;
         }
@@ -69,10 +71,11 @@ public class RingProgressView extends View {
 
     /**
      * play progress animator
+     *
      * @param progress
      */
-    private void playProgressAnimator(int progress){
-        ValueAnimator animator = ValueAnimator.ofInt(this.progress,progress);
+    private void playProgressAnimator(int progress) {
+        ValueAnimator animator = ValueAnimator.ofInt(this.progress, progress);
         animator.setDuration(300);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -92,7 +95,7 @@ public class RingProgressView extends View {
             public void onAnimationEnd(Animator animation) {
                 isAnimPlay = false;
 
-                if(lastProgress > RingProgressView.this.progress){
+                if (lastProgress > RingProgressView.this.progress) {
                     playProgressAnimator(RingProgressView.this.lastProgress);
                 } else if (RingProgressView.this.progress == 100) {
                     RingProgressView.this.setVisibility(GONE);
@@ -103,25 +106,26 @@ public class RingProgressView extends View {
         animator.start();
     }
 
-    public void drawProgress(Canvas canvas, int progress){
-        int centerX = getWidth()/2;
-        int centerY = getHeight()/2;
+    public void drawProgress(Canvas canvas, int progress) {
+        int centerX = getWidth() / 2;
+        int centerY = getHeight() / 2;
         //set inner circle radius
         int innerCircle = dip2px(context, 18);
         //set ring circle wight
         int ringWidth = dip2px(context, 5);
         //draw outer circle
-        this.paint.setARGB(255, 255 ,255, 255);
+        this.paint.setARGB(255, 255, 255, 255);
         int left = centerX - innerCircle;
         int top = centerY - innerCircle;
         int right = centerX + innerCircle;
         int bottom = centerY + innerCircle;
         paint.setStrokeWidth(ringWidth);
-        canvas.drawArc(new RectF(left,top,right,bottom),-90, (float) (progress * 3.6),false,paint);
+        canvas.drawArc(new RectF(left, top, right, bottom), -90, (float) (progress * 3.6), false, paint);
     }
 
     /**
      * dip to px
+     *
      * @param context Context
      * @param dpValue dp value
      * @return px value

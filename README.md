@@ -20,6 +20,7 @@ Mango是一款用来方便实现图片浏览的控件
 	Mango.setImages(List<MultiplexImage> images) //设置图片源
 	Mango.setPosition(int position) //设置初始显示位置
 	Mango.setImageSelectListener(ImageSelectListener listener) //设置滚动监听
+	Mango.setIsShowLoading(boolean isShowLoading); //在加载图片的时候是否显示Loading,但是如果有原图，加载原图的时候就一定会显示loading
 	Mango.open(Context context) //开启图片浏览
 #### 参数解释
 	MultiplexImage：图片加载源
